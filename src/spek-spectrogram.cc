@@ -4,7 +4,6 @@
 
 #include "spek-audio.h"
 #include "spek-events.h"
-#include "spek-fft.h"
 #include "spek-platform.h"
 #include "spek-ruler.h"
 #include "spek-utils.h"
@@ -24,6 +23,7 @@ enum
     MAX_RANGE = 0,
     URANGE = 0,
     LRANGE = -120,
+    NFFT = 2048,
     FFT_BITS = 11,
     MIN_FFT_BITS = 8,
     MAX_FFT_BITS = 14,
@@ -45,12 +45,9 @@ SpekSpectrogram::SpekSpectrogram(wxFrame *parent) :
         wxFULL_REPAINT_ON_RESIZE | wxWANTS_CHARS
     ),
     audio(new Audio()), // TODO: refactor
-    fft(new FFT()),
     pipeline(NULL),
     streams(0),
     stream(0),
-    channels(0),
-    channel(0),
     window_function(WINDOW_DEFAULT),
     duration(0.0),
     sample_rate(0),
@@ -77,7 +74,6 @@ void SpekSpectrogram::open(const wxString& path)
 {
     this->path = path;
     this->stream = 0;
-    this->channel = 0;
     start();
     Refresh();
 }
@@ -94,16 +90,6 @@ void SpekSpectrogram::save(const wxString& path)
 void SpekSpectrogram::on_char(wxKeyEvent& evt)
 {
     switch (evt.GetKeyCode()) {
-    case 'c':
-        if (this->channels) {
-            this->channel = (this->channel + 1) % this->channels;
-        }
-        break;
-    case 'C':
-        if (this->channels) {
-            this->channel = (this->channel - 1 + this->channels) % this->channels;
-        }
-        break;
     case 'f':
         this->window_function = (enum window_function) ((this->window_function + 1) % WINDOW_COUNT);
         break;
@@ -127,11 +113,19 @@ void SpekSpectrogram::on_char(wxKeyEvent& evt)
         break;
     case 's':
         if (this->streams) {
+            if (this->streams == 1) {
+                evt.Skip();
+                return;
+            }
             this->stream = (this->stream + 1) % this->streams;
         }
         break;
     case 'S':
         if (this->streams) {
+            if (this->streams == 1) {
+                evt.Skip();
+                return;
+            }
             this->stream = (this->stream - 1 + this->streams) % this->streams;
         }
         break;
@@ -140,14 +134,6 @@ void SpekSpectrogram::on_char(wxKeyEvent& evt)
         break;
     case 'U':
         this->urange = spek_max(this->urange - 1, this->lrange + 1);
-        break;
-    case 'w':
-        this->fft_bits = spek_min(this->fft_bits + 1, MAX_FFT_BITS);
-        this->create_palette();
-        break;
-    case 'W':
-        this->fft_bits = spek_max(this->fft_bits - 1, MIN_FFT_BITS);
-        this->create_palette();
         break;
     default:
         evt.Skip();
@@ -392,9 +378,8 @@ void SpekSpectrogram::start()
         this->image.Create(samples, bits_to_bands(this->fft_bits));
         this->pipeline = spek_pipeline_open(
             this->audio->open(std::string(this->path.utf8_str()), this->stream),
-            this->fft->create(this->fft_bits),
+            bits_to_bands(this->fft_bits),
             this->stream,
-            this->channel,
             this->window_function,
             samples,
             pipeline_cb,
@@ -404,7 +389,6 @@ void SpekSpectrogram::start()
         // TODO: extract conversion into a utility function.
         this->desc = wxString::FromUTF8(spek_pipeline_desc(this->pipeline).c_str());
         this->streams = spek_pipeline_streams(this->pipeline);
-        this->channels = spek_pipeline_channels(this->pipeline);
         this->duration = spek_pipeline_duration(this->pipeline);
         this->sample_rate = spek_pipeline_sample_rate(this->pipeline);
     } else {

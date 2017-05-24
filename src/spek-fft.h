@@ -1,40 +1,26 @@
-#pragma once
+#ifndef SPEK_FFT_H_
+#define SPEK_FFT_H_
 
-#include <memory>
-#include <vector>
+struct RDFTContext;
 
-class FFTPlan;
-
-class FFT
+struct spek_fft_plan
 {
-public:
-    FFT() {}
-    std::unique_ptr<FFTPlan> create(int nbits);
+    // Internal data.
+    struct RDFTContext *cx;
+    int n;
+
+    // Exposed properties.
+    float *input;
+    float *output;
 };
 
-class FFTPlan
-{
-public:
-    FFTPlan(int nbits) :
-        input_size(1 << nbits), output_size((1 << (nbits - 1)) + 1),
-        input(input_size), output(output_size) {}
-    virtual ~FFTPlan() {}
+// Allocate buffers and create a new FFT plan.
+struct spek_fft_plan * spek_fft_plan_new(int n);
 
-    int get_input_size() const { return this->input_size; }
-    int get_output_size() const { return this->output_size; }
-    float get_input(int i) const { return this->input[i]; }
-    void set_input(int i, float v) { this->input[i] = v; }
-    float get_output(int i) const { return this->output[i]; }
-    void set_output(int i, float v) { this->output[i] = v; }
+// Execute the FFT on plan->input.
+void spek_fft_execute(struct spek_fft_plan *p);
 
-    virtual void execute() = 0;
+// Destroy the plan and de-allocate buffers.
+void spek_fft_delete(struct spek_fft_plan *p);
 
-protected:
-    float *get_input() { return this->input.data(); }
-
-private:
-    int input_size;
-    int output_size;
-    std::vector<float> input;
-    std::vector<float> output;
-};
+#endif

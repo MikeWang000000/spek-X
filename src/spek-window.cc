@@ -341,6 +341,9 @@ void SpekWindow::on_close(wxCommandEvent& event)
 
 static void * check_version(void *p)
 {
+    // Disable updates since it's a modded version
+    return NULL;
+
     // Does the user want to check for updates?
     SpekPreferences& prefs = SpekPreferences::get();
     if (!prefs.get_check_update()) {

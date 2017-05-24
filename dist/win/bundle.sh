@@ -5,13 +5,15 @@
 # Check README.md in this directory for instructions.
 
 # Adjust these variables if necessary.
-MXE=$(realpath $(dirname $0)/../../../mxe/usr)
-MAKE=gmake
+MXE=/opt/mxe-spek/usr
+MAKE=make
+JOBS=3
 ZIP=zip
 
 HOST=i686-w64-mingw32.static
 LANGUAGES="ca cs da de el eo es fi fr gl it ja lv nb nl pl pt_BR ru sk sr@latin sv tr uk vi zh_CN zh_TW"
 PATH="$MXE"/bin:$PATH
+STRIP="$HOST"-strip
 WINDRES="$HOST"-windres
 WX_CONFIG="$MXE"/"$HOST"/bin/wx-config
 
@@ -22,24 +24,17 @@ rm -fr dist/win/build && mkdir dist/win/build
 rm -f dist/win/spek.res
 "$WINDRES" dist/win/spek.rc -O coff -o dist/win/spek.res
 mkdir -p src/dist/win && cp dist/win/spek.res src/dist/win/
-mkdir -p tests/dist/win && cp dist/win/spek.res tests/dist/win/
 
 # Compile spek.exe
 LDFLAGS="-mwindows dist/win/spek.res" ./autogen.sh \
+    --enable-shared=no \
     --host="$HOST" \
-    --disable-valgrind \
     --with-wx-config="$WX_CONFIG" \
     --prefix=${PWD}/dist/win/build && \
-    "$MAKE" -j8 && \
+    "$MAKE" clean && \
+    "$MAKE" -j $JOBS && \
     "$MAKE" install || exit 1
-
-# Compile test.exe
-LDFLAGS="-mconsole" ./autogen.sh \
-    --host="$HOST" \
-    --disable-valgrind \
-    --with-wx-config="$WX_CONFIG" \
-    --prefix=${PWD}/dist/win/build && \
-    "$MAKE" check -j8 TESTS=
+"$STRIP" dist/win/build/bin/spek.exe
 
 # Copy files to the bundle
 cd dist/win
@@ -56,11 +51,6 @@ for lang in $LANGUAGES; do
 done
 rm -fr build
 
-# Copy tests
-rm -fr tests && mkdir tests
-cp ../../tests/.libs/test.exe tests/
-cp -a ../../tests/samples tests/
-
 # Create a zip archive
 rm -f spek.zip
 "$ZIP" -r spek.zip Spek
@@ -68,5 +58,4 @@ rm -f spek.zip
 cd ../..
 
 # Clean up
-rm -fr src/dist tests/dist
 rm dist/win/spek.res

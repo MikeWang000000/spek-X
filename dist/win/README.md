@@ -6,11 +6,13 @@ This is done in two steps:
  * Building the MSI package under Windows.
 
 For the first step you can use any Unix-y environment. Set up
-[MXE](http://mxe.cc/#tutorial).
+[MXE](http://mxe.cc/#tutorial) to /opt/mxe-spek.
+
+For this version [MXE #00da92a](https://github.com/mxe/mxe/tree/00da932fef31a046b4507fc3ceb98b17e5f1d682) was used.
 
 Apply `mxe.diff` and build Spek dependencies:
 
-    make pthreads ffmpeg wxwidgets -j8 JOBS=8
+    make pthreads ffmpeg wxwidgets -j1 JOBS=4
 
 Build Spek, adjusting `bundle.sh` variables as necessary:
 

@@ -18,20 +18,21 @@
 
 enum
 {
-    NFFT = 64 // Number of FFTs to pre-fetch.
+    NFFT = 64, // Number of FFTs to pre-fetch.
+    FFT_BITS = 11
 };
 
 struct spek_pipeline
 {
     std::unique_ptr<AudioFile> file;
-    std::unique_ptr<FFTPlan> fft;
+    int bands;
     int stream;
-    int channel;
     enum window_function window_function;
     int samples;
     spek_pipeline_cb cb;
     void *cb_data;
 
+    struct spek_fft_plan *fft;
     float *coss; // Pre-computed cos table.
     int nfft; // Size of the FFT transform.
     int input_size;
@@ -62,9 +63,8 @@ static void reader_sync(struct spek_pipeline *p, int pos);
 
 struct spek_pipeline * spek_pipeline_open(
     std::unique_ptr<AudioFile> file,
-    std::unique_ptr<FFTPlan> fft,
+    int bands,
     int stream,
-    int channel,
     enum window_function window_function,
     int samples,
     spek_pipeline_cb cb,
@@ -73,15 +73,15 @@ struct spek_pipeline * spek_pipeline_open(
 {
     spek_pipeline *p = new spek_pipeline();
     p->file = std::move(file);
-    p->fft = std::move(fft);
+    p->bands = bands;
     p->stream = stream;
-    p->channel = channel;
     p->window_function = window_function;
     p->samples = samples;
     p->cb = cb;
     p->cb_data = cb_data;
 
     p->coss = NULL;
+    p->fft = NULL;
     p->input = NULL;
     p->output = NULL;
     p->has_reader_thread = false;
@@ -92,16 +92,17 @@ struct spek_pipeline * spek_pipeline_open(
     p->has_worker_cond = false;
 
     if (!p->file->get_error()) {
-        p->nfft = p->fft->get_input_size();
+        p->nfft = 2 * bands - 2;
         p->coss = (float*)malloc(p->nfft * sizeof(float));
         float cf = 2.0f * (float)M_PI / (p->nfft - 1.0f);
         for (int i = 0; i < p->nfft; ++i) {
             p->coss[i] = cosf(cf * i);
         }
+        p->fft = spek_fft_plan_new(p->nfft);
         p->input_size = p->nfft * (NFFT * 2 + 1);
         p->input = (float*)malloc(p->input_size * sizeof(float));
-        p->output = (float*)malloc(p->fft->get_output_size() * sizeof(float));
-        p->file->start(channel, samples);
+        p->output = (float*)malloc(bands * sizeof(float));
+        p->file->start(samples);
     }
 
     return p;
@@ -159,6 +160,10 @@ void spek_pipeline_close(struct spek_pipeline *p)
         free(p->input);
         p->input = NULL;
     }
+    if (p->fft) {
+        spek_fft_delete(p->fft);
+        p->fft = NULL;
+    }
     if (p->coss) {
         free(p->coss);
         p->coss = NULL;
@@ -202,32 +207,10 @@ std::string spek_pipeline_desc(const struct spek_pipeline *pipeline)
     if (pipeline->file->get_channels()) {
         items.push_back(std::string(
             wxString::Format(
-                // TRANSLATORS: first %d is the current channel, second %d is the total number.
-                "channel %d / %d", pipeline->channel + 1, pipeline->file->get_channels()
+                ngettext("%d channel", "%d channels", pipeline->file->get_channels()),
+                pipeline->file->get_channels()
             ).utf8_str()
         ));
-    }
-
-    if (pipeline->file->get_error() == AudioError::OK) {
-        items.push_back(std::string(wxString::Format(wxT("W:%i"), pipeline->nfft).utf8_str()));
-
-        std::string window_function_name;
-        switch (pipeline->window_function) {
-        case WINDOW_HANN:
-            window_function_name = std::string("Hann");
-            break;
-        case WINDOW_HAMMING:
-            window_function_name = std::string("Hamming");
-            break;
-        case WINDOW_BLACKMAN_HARRIS:
-            window_function_name = std::string("Blackman–Harris");
-            break;
-        default:
-            assert(false);
-        }
-        if (window_function_name.size()) {
-            items.push_back("F:" + window_function_name);
-        }
     }
 
     std::string desc;
@@ -271,7 +254,7 @@ std::string spek_pipeline_desc(const struct spek_pipeline *pipeline)
     auto error_string = std::string(error.utf8_str());
     if (desc.empty()) {
         desc = error_string;
-    } else if (pipeline->stream < pipeline->file->get_streams()) {
+    } else if (pipeline->stream < pipeline->file->get_streams() && pipeline->file->get_streams() != 1) {
         desc = std::string(
             wxString::Format(
                 // TRANSLATORS: first %d is the stream number, second %d is the
@@ -295,11 +278,6 @@ int spek_pipeline_streams(const struct spek_pipeline *pipeline)
     return pipeline->file->get_streams();
 }
 
-int spek_pipeline_channels(const struct spek_pipeline *pipeline)
-{
-    return pipeline->file->get_channels();
-}
-
 double spek_pipeline_duration(const struct spek_pipeline *pipeline)
 {
     return pipeline->file->get_duration();
@@ -320,13 +298,20 @@ static void * reader_func(void *pp)
     }
 
     int pos = 0, prev_pos = 0;
+    int channels = p->file->get_channels();
     int len;
     while ((len = p->file->read()) > 0) {
         if (p->quit) break;
 
         const float *buffer = p->file->get_buffer();
-        while (len-- > 0) {
-            p->input[pos] = *buffer++;
+        while (len >= channels) {
+            float val = 0.0f;
+            for (int i = 0; i < channels; i++) {
+                val += buffer[i];
+            }
+            p->input[pos] = val / channels;
+            buffer += channels;
+            len -= channels;
             pos = (pos + 1) % p->input_size;
 
             // Wake up the worker if we have enough data.
@@ -334,7 +319,7 @@ static void * reader_func(void *pp)
                 reader_sync(p, prev_pos = pos);
             }
         }
-        assert(len == -1);
+        assert(len == 0);
     }
 
     if (pos != prev_pos) {
@@ -347,7 +332,7 @@ static void * reader_func(void *pp)
     pthread_join(p->worker_thread, NULL);
 
     // Notify the client.
-    p->cb(p->fft->get_output_size(), -1, NULL, p->cb_data);
+    p->cb((1 << (FFT_BITS - 1)) + 1, -1, NULL, p->cb_data);
     return NULL;
 }
 
@@ -391,7 +376,7 @@ static void * worker_func(void *pp)
     int head = 0, tail = 0;
     int prev_head = 0;
 
-    memset(p->output, 0, sizeof(float) * p->fft->get_output_size());
+    memset(p->output, 0, sizeof(float) * p->bands);
 
     while (true) {
         pthread_mutex_lock(&p->reader_mutex);
@@ -432,12 +417,12 @@ static void * worker_func(void *pp)
                 for (int i = 0; i < p->nfft; i++) {
                     float val = p->input[(p->input_size + head - p->nfft + i) % p->input_size];
                     val *= get_window(p->window_function, i, p->coss, p->nfft);
-                    p->fft->set_input(i, val);
+                    p->fft->input[i] = val;
                 }
-                p->fft->execute();
+                spek_fft_execute(p->fft);
                 num_fft++;
-                for (int i = 0; i < p->fft->get_output_size(); i++) {
-                    p->output[i] += p->fft->get_output(i);
+                for (int i = 0; i < p->bands; i++) {
+                    p->output[i] += p->fft->output[i];
                 }
             }
 
@@ -449,14 +434,14 @@ static void * worker_func(void *pp)
                     acc_error += p->file->get_error_per_interval();
                 }
 
-                for (int i = 0; i < p->fft->get_output_size(); i++) {
+                for (int i = 0; i < p->bands; i++) {
                     p->output[i] /= num_fft;
                 }
 
                 if (sample == p->samples) break;
-                p->cb(p->fft->get_output_size(), sample++, p->output, p->cb_data);
+                p->cb((1 << (FFT_BITS - 1)) + 1, sample++, p->output, p->cb_data);
 
-                memset(p->output, 0, sizeof(float) * p->fft->get_output_size());
+                memset(p->output, 0, sizeof(float) * p->bands);
                 frames = 0;
                 num_fft = 0;
             }

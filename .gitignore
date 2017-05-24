@@ -24,7 +24,6 @@ dist/osx/Spek.app
 dist/osx/Spek.dmg
 dist/win/Spek
 dist/win/spek.wxs
-dist/win/tests
 env
 install-sh
 intltool-extract.in
@@ -44,9 +43,5 @@ src/*.stamp
 src/.libs
 src/spek
 stamp-h1
-tests/.libs
-tests/perf
-tests/samples/perf.wav
-tests/test
 web/version
 xmldocs.make

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SPEK_SPECTROGRAM_H_
+#define SPEK_SPECTROGRAM_H_
 
 #include <memory>
 
@@ -8,7 +9,6 @@
 #include "spek-pipeline.h"
 
 class Audio;
-class FFT;
 class SpekHaveSampleEvent;
 struct spek_pipeline;
 
@@ -33,12 +33,9 @@ private:
     void create_palette();
 
     std::unique_ptr<Audio> audio;
-    std::unique_ptr<FFT> fft;
     spek_pipeline *pipeline;
     int streams;
     int stream;
-    int channels;
-    int channel;
     enum window_function window_function;
     wxString path;
     wxString desc;
@@ -54,3 +51,5 @@ private:
 
     DECLARE_EVENT_TABLE()
 };
+
+#endif

@@ -2,8 +2,7 @@ SUBDIRS = \
 	data \
 	man \
 	po \
-	src \
-	tests
+	src
 
 EXTRA_DIST = \
 	INSTALL.md \
@@ -21,8 +20,7 @@ EXTRA_DIST = \
 	lic/libtiff \
 	lic/regex \
 	lic/wxWindows \
-	lic/zlib \
-	tests/samples
+	lic/zlib
 
 DISTCLEANFILES = \
 	intltool-extract \
