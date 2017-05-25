@@ -288,7 +288,7 @@ void SpekWindow::on_preferences(wxCommandEvent&)
 void SpekWindow::on_help(wxCommandEvent&)
 {
     wxLaunchDefaultBrowser(
-        wxString::Format("http://spek.cc/man-%s.html", PACKAGE_VERSION)
+        wxString::Format("http://spek.cc/man-%.5s.html", PACKAGE_VERSION)
     );
 }
 
