@@ -19,9 +19,6 @@ configure
 data/spek.desktop
 data/spek.desktop.in
 depcomp
-dist/osx/Info.plist
-dist/osx/Spek.app
-dist/osx/Spek.dmg
 dist/win/Spek
 dist/win/spek.wxs
 env

@@ -329,7 +329,7 @@ void SpekWindow::on_notify(wxCommandEvent&)
 
 void SpekWindow::on_visit(wxCommandEvent&)
 {
-    wxLaunchDefaultBrowser("http://spek.cc");
+    wxLaunchDefaultBrowser("https://github.com/withmorten/spek/releases");
 }
 
 void SpekWindow::on_close(wxCommandEvent& event)
@@ -341,9 +341,6 @@ void SpekWindow::on_close(wxCommandEvent& event)
 
 static void * check_version(void *p)
 {
-    // Disable updates since it's a modded version
-    return NULL;
-
     // Does the user want to check for updates?
     SpekPreferences& prefs = SpekPreferences::get();
     if (!prefs.get_check_update()) {
@@ -368,8 +365,8 @@ static void * check_version(void *p)
     // Get the version number.
     wxString version;
     wxHTTP http;
-    if (http.Connect("spek.cc")) {
-        wxInputStream *stream = http.GetInputStream("/version");
+    if (http.Connect("morten.with.de")) {
+        wxInputStream *stream = http.GetInputStream("/spek");
         if (stream) {
             wxStringOutputStream out(&version);
             stream->Read(out);
