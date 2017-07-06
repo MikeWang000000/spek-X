@@ -5,13 +5,15 @@
 # Check README.md in this directory for instructions.
 
 # Adjust these variables if necessary.
-MXE=$(realpath $(dirname $0)/../../../mxe/usr)
-MAKE=gmake
+MXE=/opt/mxe-spek/usr
+MAKE=make
+JOBS=3
 ZIP=zip
 
 HOST=i686-w64-mingw32.static
 LANGUAGES="ca cs da de el eo es fi fr gl it ja lv nb nl pl pt_BR ru sk sr@latin sv tr uk vi zh_CN zh_TW"
 PATH="$MXE"/bin:$PATH
+STRIP="$HOST"-strip
 WINDRES="$HOST"-windres
 WX_CONFIG="$MXE"/"$HOST"/bin/wx-config
 
@@ -26,12 +28,15 @@ mkdir -p tests/dist/win && cp dist/win/spek.res tests/dist/win/
 
 # Compile spek.exe
 LDFLAGS="-mwindows dist/win/spek.res" ./autogen.sh \
+    --enable-shared=no \
     --host="$HOST" \
     --disable-valgrind \
     --with-wx-config="$WX_CONFIG" \
     --prefix=${PWD}/dist/win/build && \
-    "$MAKE" -j8 && \
+    "$MAKE" clean && \
+    "$MAKE" -j $JOBS && \
     "$MAKE" install || exit 1
+"$STRIP" dist/win/build/bin/spek.exe
 
 # Compile test.exe
 LDFLAGS="-mconsole" ./autogen.sh \
