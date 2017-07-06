@@ -169,6 +169,7 @@ void SpekWindow::open(const wxString& path)
 static const char *audio_extensions[] = {
     "3gp",
     "aac",
+    "ac3",
     "aif",
     "aifc",
     "aiff",
@@ -178,10 +179,10 @@ static const char *audio_extensions[] = {
     "au",
     "dts",
     "flac",
-    "flv",
     "gsm",
     "m4a",
-    "m4p",
+    "m4r",
+    "mka",
     "mp3",
     "mp4",
     "mp+",
@@ -288,7 +289,7 @@ void SpekWindow::on_preferences(wxCommandEvent&)
 void SpekWindow::on_help(wxCommandEvent&)
 {
     wxLaunchDefaultBrowser(
-        wxString::Format("http://spek.cc/man-%s.html", PACKAGE_VERSION)
+        wxString::Format("https://github.com/withmorten/spek/blob/release/%s/MANUAL.md", PACKAGE_VERSION)
     );
 }
 
@@ -329,7 +330,7 @@ void SpekWindow::on_notify(wxCommandEvent&)
 
 void SpekWindow::on_visit(wxCommandEvent&)
 {
-    wxLaunchDefaultBrowser("http://spek.cc");
+    wxLaunchDefaultBrowser("https://github.com/withmorten/spek/releases");
 }
 
 void SpekWindow::on_close(wxCommandEvent& event)
@@ -365,8 +366,8 @@ static void * check_version(void *p)
     // Get the version number.
     wxString version;
     wxHTTP http;
-    if (http.Connect("spek.cc")) {
-        wxInputStream *stream = http.GetInputStream("/version");
+    if (http.Connect("morten.with.de")) {
+        wxInputStream *stream = http.GetInputStream("/spek");
         if (stream) {
             wxStringOutputStream out(&version);
             stream->Read(out);

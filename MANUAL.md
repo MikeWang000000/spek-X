@@ -1,4 +1,4 @@
-% SPEK(1) User's Guide | Version 0.8.2
+% SPEK(1) User's Guide | Version 0.8.2.2
 %
 % 2013-04-18
 
@@ -80,4 +80,4 @@ in the LICENCE.md file distributed with the source code.
 
 # DISTRIBUTION
 
-The latest version of *Spek* may be downloaded from <http://spek.cc>.
+The latest version of this *Spek* fork may be downloaded from <https://github.com/withmorten/spek/releases>.
