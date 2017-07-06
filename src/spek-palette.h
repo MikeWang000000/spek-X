@@ -7,7 +7,7 @@ enum palette {
     PALETTE_SOX,
     PALETTE_MONO,
     PALETTE_COUNT,
-    PALETTE_DEFAULT = PALETTE_SOX,
+    PALETTE_DEFAULT = PALETTE_SPECTRUM,
 };
 
 uint32_t spek_palette(enum palette palette, double level);

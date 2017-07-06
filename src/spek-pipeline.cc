@@ -26,7 +26,6 @@ struct spek_pipeline
     std::unique_ptr<AudioFile> file;
     std::unique_ptr<FFTPlan> fft;
     int stream;
-    int channel;
     enum window_function window_function;
     int samples;
     spek_pipeline_cb cb;
@@ -64,7 +63,6 @@ struct spek_pipeline * spek_pipeline_open(
     std::unique_ptr<AudioFile> file,
     std::unique_ptr<FFTPlan> fft,
     int stream,
-    int channel,
     enum window_function window_function,
     int samples,
     spek_pipeline_cb cb,
@@ -75,7 +73,6 @@ struct spek_pipeline * spek_pipeline_open(
     p->file = std::move(file);
     p->fft = std::move(fft);
     p->stream = stream;
-    p->channel = channel;
     p->window_function = window_function;
     p->samples = samples;
     p->cb = cb;
@@ -101,7 +98,7 @@ struct spek_pipeline * spek_pipeline_open(
         p->input_size = p->nfft * (NFFT * 2 + 1);
         p->input = (float*)malloc(p->input_size * sizeof(float));
         p->output = (float*)malloc(p->fft->get_output_size() * sizeof(float));
-        p->file->start(channel, samples);
+        p->file->start(samples);
     }
 
     return p;
@@ -202,8 +199,8 @@ std::string spek_pipeline_desc(const struct spek_pipeline *pipeline)
     if (pipeline->file->get_channels()) {
         items.push_back(std::string(
             wxString::Format(
-                // TRANSLATORS: first %d is the current channel, second %d is the total number.
-                "channel %d / %d", pipeline->channel + 1, pipeline->file->get_channels()
+                ngettext("%d channel", "%d channels", pipeline->file->get_channels()),
+                pipeline->file->get_channels()
             ).utf8_str()
         ));
     }
@@ -295,11 +292,6 @@ int spek_pipeline_streams(const struct spek_pipeline *pipeline)
     return pipeline->file->get_streams();
 }
 
-int spek_pipeline_channels(const struct spek_pipeline *pipeline)
-{
-    return pipeline->file->get_channels();
-}
-
 double spek_pipeline_duration(const struct spek_pipeline *pipeline)
 {
     return pipeline->file->get_duration();
@@ -320,13 +312,20 @@ static void * reader_func(void *pp)
     }
 
     int pos = 0, prev_pos = 0;
+    int channels = p->file->get_channels();
     int len;
     while ((len = p->file->read()) > 0) {
         if (p->quit) break;
 
         const float *buffer = p->file->get_buffer();
-        while (len-- > 0) {
-            p->input[pos] = *buffer++;
+        while (len >= channels) {
+            float val = 0.0f;
+            for (int i = 0; i < channels; i++) {
+                val += buffer[i];
+            }
+            p->input[pos] = val / channels;
+            buffer += channels;
+            len -= channels;
             pos = (pos + 1) % p->input_size;
 
             // Wake up the worker if we have enough data.
@@ -334,7 +333,7 @@ static void * reader_func(void *pp)
                 reader_sync(p, prev_pos = pos);
             }
         }
-        assert(len == -1);
+        assert(len == 0);
     }
 
     if (pos != prev_pos) {

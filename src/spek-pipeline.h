@@ -21,7 +21,6 @@ struct spek_pipeline * spek_pipeline_open(
     std::unique_ptr<AudioFile> file,
     std::unique_ptr<FFTPlan> fft,
     int stream,
-    int channel,
     enum window_function window_function,
     int samples,
     spek_pipeline_cb cb,
@@ -33,6 +32,5 @@ void spek_pipeline_close(struct spek_pipeline *pipeline);
 
 std::string spek_pipeline_desc(const struct spek_pipeline *pipeline);
 int spek_pipeline_streams(const struct spek_pipeline *pipeline);
-int spek_pipeline_channels(const struct spek_pipeline *pipeline);
 double spek_pipeline_duration(const struct spek_pipeline *pipeline);
 int spek_pipeline_sample_rate(const struct spek_pipeline *pipeline);

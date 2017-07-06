@@ -37,8 +37,6 @@ private:
     spek_pipeline *pipeline;
     int streams;
     int stream;
-    int channels;
-    int channel;
     enum window_function window_function;
     wxString path;
     wxString desc;
