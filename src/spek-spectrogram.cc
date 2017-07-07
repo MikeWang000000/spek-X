@@ -91,6 +91,16 @@ void SpekSpectrogram::save(const wxString& path)
 void SpekSpectrogram::on_char(wxKeyEvent& evt)
 {
     switch (evt.GetKeyCode()) {
+    // case 'c':
+        // if (this->channels) {
+            // this->channel = (this->channel + 1) % this->channels;
+        // }
+        // break;
+    // case 'C':
+        // if (this->channels) {
+            // this->channel = (this->channel - 1 + this->channels) % this->channels;
+        // }
+        // break;
     case 'f':
         this->window_function = (enum window_function) ((this->window_function + 1) % WINDOW_COUNT);
         break;
@@ -114,11 +124,19 @@ void SpekSpectrogram::on_char(wxKeyEvent& evt)
         break;
     case 's':
         if (this->streams) {
+            if (this->streams == 1) {
+                evt.Skip();
+                return;
+            }
             this->stream = (this->stream + 1) % this->streams;
         }
         break;
     case 'S':
         if (this->streams) {
+            if (this->streams == 1) {
+                evt.Skip();
+                return;
+            }
             this->stream = (this->stream - 1 + this->streams) % this->streams;
         }
         break;
