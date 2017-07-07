@@ -47,9 +47,6 @@ On OS X use the Command key instead of Ctrl.
 
 ## Spectrogram
 
-`c`, `C`
-:   Change the audio channel.
-
 `f`, `F`
 :   Change the DFT window function.
 
