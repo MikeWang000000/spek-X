@@ -12,9 +12,9 @@ class AudioFileImpl : public AudioFile
 {
 public:
     AudioFileImpl(
-        AudioError error, AVFormatContext *format_context, int audio_stream,
-        const std::string& codec_name, int bit_rate, int sample_rate, int bits_per_sample,
-        int streams, int channels, double duration
+        AudioError error, AVFormatContext *format_context, AVCodecContext *codec_context,
+        int audio_stream, const std::string& codec_name, int bit_rate, int sample_rate,
+        int bits_per_sample, int streams, int channels, double duration
     );
     ~AudioFileImpl() override;
     void start(int samples) override;
@@ -36,6 +36,7 @@ public:
 private:
     AudioError error;
     AVFormatContext *format_context;
+    AVCodecContext *codec_context;
     int audio_stream;
     std::string codec_name;
     int bit_rate;
@@ -89,7 +90,7 @@ std::unique_ptr<AudioFile> Audio::open(const std::string& file_name, int stream)
     int streams = 0;
     if (!error) {
         for (unsigned int i = 0; i < format_context->nb_streams; i++) {
-            if (format_context->streams[i]->codec->codec_type == AVMEDIA_TYPE_AUDIO) {
+            if (format_context->streams[i]->codecpar->codec_type == AVMEDIA_TYPE_AUDIO) {
                 if (stream == streams) {
                     audio_stream = i;
                 }
@@ -102,13 +103,13 @@ std::unique_ptr<AudioFile> Audio::open(const std::string& file_name, int stream)
     }
 
     AVStream *avstream = nullptr;
-    AVCodecContext *codec_context = nullptr;
+    AVCodecParameters *codecpar = nullptr;
     AVCodec *codec = nullptr;
     if (!error) {
         avstream = format_context->streams[audio_stream];
-        codec_context = avstream->codec;
+        codecpar = avstream->codecpar;
 
-        switch (codec_context->codec_id) {
+        switch (codecpar->codec_id) {
         case AV_CODEC_ID_MP1:
             codec = avcodec_find_decoder_by_name("mp1float");
             break;
@@ -125,7 +126,7 @@ std::unique_ptr<AudioFile> Audio::open(const std::string& file_name, int stream)
             codec = avcodec_find_decoder_by_name("mp3on4float");
             break;
         default:
-            codec = avcodec_find_decoder(codec_context->codec_id);
+            codec = avcodec_find_decoder(codecpar->codec_id);
             break;
         }
 
@@ -143,24 +144,24 @@ std::unique_ptr<AudioFile> Audio::open(const std::string& file_name, int stream)
     if (!error) {
         // We can already fill in the stream info even if the codec won't be able to open it.
         codec_name = codec->long_name;
-        bit_rate = codec_context->bit_rate;
-        sample_rate = codec_context->sample_rate;
-        bits_per_sample = codec_context->bits_per_raw_sample;
+        bit_rate = codecpar->bit_rate;
+        sample_rate = codecpar->sample_rate;
+        bits_per_sample = codecpar->bits_per_raw_sample;
         if (!bits_per_sample) {
             // APE uses bpcs, FLAC uses bprs.
-            bits_per_sample = codec_context->bits_per_coded_sample;
+            bits_per_sample = codecpar->bits_per_coded_sample;
         }
-        if (codec_context->codec_id == AV_CODEC_ID_AAC ||
-            codec_context->codec_id == AV_CODEC_ID_MUSEPACK8 ||
-            codec_context->codec_id == AV_CODEC_ID_WMAV1 ||
-            codec_context->codec_id == AV_CODEC_ID_WMAV2) {
+        if (codecpar->codec_id == AV_CODEC_ID_AAC ||
+            codecpar->codec_id == AV_CODEC_ID_MUSEPACK8 ||
+            codecpar->codec_id == AV_CODEC_ID_WMAV1 ||
+            codecpar->codec_id == AV_CODEC_ID_WMAV2) {
             // These decoders set both bps and bitrate.
             bits_per_sample = 0;
         }
-        if (codec_context->codec_id == AV_CODEC_ID_ALAC) {
+        if (codecpar->codec_id == AV_CODEC_ID_ALAC) {
             bit_rate = 0;
         }
-        channels = codec_context->channels;
+        channels = codecpar->channels;
 
         if (avstream->duration != AV_NOPTS_VALUE) {
             duration = avstream->duration * av_q2d(avstream->time_base);
@@ -175,12 +176,24 @@ std::unique_ptr<AudioFile> Audio::open(const std::string& file_name, int stream)
         }
     }
 
-    if (!error && avcodec_open2(codec_context, codec, nullptr) < 0) {
+    AVCodecContext *codec_context = nullptr;
+    if (!error) {
         error = AudioError::CANNOT_OPEN_DECODER;
+        // Allocate a codec context for the decoder.
+        codec_context = avcodec_alloc_context3(codec);
+        if (codec_context) {
+            // Copy codec parameters from input stream to output codec context.
+            if (avcodec_parameters_to_context(codec_context, codecpar) == 0) {
+                // Finally, init the decoder.
+                if (avcodec_open2(codec_context, codec, nullptr) == 0) {
+                    error = AudioError::OK;
+                }
+            }
+        }
     }
 
     if (!error) {
-        AVSampleFormat fmt = codec_context->sample_fmt;
+        AVSampleFormat fmt = (AVSampleFormat)codecpar->format;
         if (fmt != AV_SAMPLE_FMT_S16 && fmt != AV_SAMPLE_FMT_S16P &&
             fmt != AV_SAMPLE_FMT_S32 && fmt != AV_SAMPLE_FMT_S32P &&
             fmt != AV_SAMPLE_FMT_FLT && fmt != AV_SAMPLE_FMT_FLTP &&
@@ -190,21 +203,21 @@ std::unique_ptr<AudioFile> Audio::open(const std::string& file_name, int stream)
     }
 
     return std::unique_ptr<AudioFile>(new AudioFileImpl(
-        error, format_context, audio_stream,
-        codec_name, bit_rate, sample_rate, bits_per_sample,
-        streams, channels, duration
+        error, format_context, codec_context,
+        audio_stream, codec_name, bit_rate, sample_rate,
+        bits_per_sample, streams, channels, duration
     ));
 }
 
 AudioFileImpl::AudioFileImpl(
-    AudioError error, AVFormatContext *format_context, int audio_stream,
-    const std::string& codec_name, int bit_rate, int sample_rate, int bits_per_sample,
-    int streams, int channels, double duration
+    AudioError error, AVFormatContext *format_context, AVCodecContext *codec_context,
+    int audio_stream, const std::string& codec_name, int bit_rate, int sample_rate,
+    int bits_per_sample, int streams, int channels, double duration
 ) :
-    error(error), format_context(format_context), audio_stream(audio_stream),
-    codec_name(codec_name), bit_rate(bit_rate),
-    sample_rate(sample_rate), bits_per_sample(bits_per_sample),
-    streams(streams), channels(channels), duration(duration)
+    error(error), format_context(format_context), codec_context(codec_context),
+    audio_stream(audio_stream), codec_name(codec_name), bit_rate(bit_rate),
+    sample_rate(sample_rate),
+    bits_per_sample(bits_per_sample), streams(streams), channels(channels), duration(duration)
 {
     av_init_packet(&this->packet);
     this->packet.data = nullptr;
@@ -233,12 +246,6 @@ AudioFileImpl::~AudioFileImpl()
         av_packet_unref(&this->packet);
     }
     if (this->format_context) {
-        if (this->audio_stream >= 0) {
-            auto codec_context = this->format_context->streams[this->audio_stream]->codec;
-            if (codec_context) {
-                avcodec_close(codec_context);
-            }
-        }
         avformat_close_input(&this->format_context);
     }
 }
@@ -262,9 +269,10 @@ int AudioFileImpl::read()
     for (;;) {
         while (this->packet.size > 0) {
             av_frame_unref(this->frame);
-            auto codec_context = this->format_context->streams[this->audio_stream]->codec;
             int got_frame = 0;
-            int len = avcodec_decode_audio4(codec_context, this->frame, &got_frame, &this->packet);
+            int len = avcodec_decode_audio4(
+                this->codec_context, this->frame, &got_frame, &this->packet
+            );
             if (len < 0) {
                 // Error, skip the frame.
                 break;
