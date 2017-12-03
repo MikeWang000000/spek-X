@@ -4,6 +4,8 @@
 # 
 # Translators:
 # Alexander Kojevnikov <alexander@kojevnikov.com>, 2011-2012
+# Gabriel Secreve <rdsserver@outlook.com>, 2017
+# Johan van Rietveld <johan.van.rietveld@home.nl>, 2016
 # theguyofdoom <thom.venividivici@gmail.com>, 2011
 # theguyofdoom <thom.venividivici@gmail.com>, 2012
 # Wouter Bolsterlee <wbolster@gnome.org>, 2011
@@ -11,10 +13,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-11 10:26-0700\n"
-"PO-Revision-Date: 2013-11-20 10:50+0000\n"
-"Last-Translator: Alexander Kojevnikov <alexander@kojevnikov.com>\n"
-"Language-Team: Dutch (http://www.transifex.com/projects/p/spek/language/nl/)\n"
+"POT-Creation-Date: 2014-03-29 13:05-0700\n"
+"PO-Revision-Date: 2017-09-19 09:42+0000\n"
+"Last-Translator: Gabriel Secreve <rdsserver@outlook.com>\n"
+"Language-Team: Dutch (http://www.transifex.com/spek/spek/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -79,7 +81,7 @@ msgstr "Kan decoder niet vinden"
 
 #: ../src/spek-pipeline.cc:246
 msgid "Unknown duration"
-msgstr ""
+msgstr "Tijdsduur onbekend"
 
 #: ../src/spek-pipeline.cc:249
 msgid "No audio channels"
@@ -91,7 +93,7 @@ msgstr "Kan decoder niet openen"
 
 #: ../src/spek-pipeline.cc:255
 msgid "Unsupported sample format"
-msgstr "Sample-formaat niet ondersteund"
+msgstr "Sampleformaat niet ondersteund"
 
 #. TRANSLATORS: first %s is the error message, second %s is stream
 #. description.
@@ -102,7 +104,7 @@ msgstr "%s: %s"
 
 #: ../src/spek-preferences-dialog.cc:67
 msgid "Preferences"
-msgstr "Einstellungen"
+msgstr "Voorkeuren"
 
 #: ../src/spek-preferences-dialog.cc:72
 msgid "(system default)"
@@ -111,7 +113,7 @@ msgstr "(systeem standaard)"
 #. TRANSLATORS: The name of a section in the Preferences dialog.
 #: ../src/spek-preferences-dialog.cc:79
 msgid "General"
-msgstr "Allgemein"
+msgstr "Algemeen"
 
 #: ../src/spek-preferences-dialog.cc:88
 msgid "Language:"
@@ -145,72 +147,72 @@ msgstr "-00 dB"
 msgid "Spek - Acoustic Spectrum Analyser"
 msgstr "Spek - Akoestische spectrumanalyse"
 
-#: ../src/spek-window.cc:95
+#: ../src/spek-window.cc:91
 msgid "&File"
-msgstr "&File"
+msgstr "&Bestand"
 
-#: ../src/spek-window.cc:101
+#: ../src/spek-window.cc:97
 msgid "&Edit"
 msgstr "Be&werken"
 
-#: ../src/spek-window.cc:105 ../src/spek-window.cc:110
+#: ../src/spek-window.cc:101 ../src/spek-window.cc:106
 msgid "&Help"
 msgstr "&Hulp"
 
-#: ../src/spek-window.cc:133
+#: ../src/spek-window.cc:128
 msgid "Help"
 msgstr "Hulp"
 
-#: ../src/spek-window.cc:147
+#: ../src/spek-window.cc:141
 msgid "A new version of Spek is available, click to download."
-msgstr ""
+msgstr "Er is een nieuwe versie van Spek beschikbaar, klik voor download"
 
 #. TRANSLATORS: window title, %s is replaced with the file name
-#: ../src/spek-window.cc:185
+#: ../src/spek-window.cc:179
 #, c-format
 msgid "Spek - %s"
 msgstr "Spek – %s"
 
-#: ../src/spek-window.cc:232
+#: ../src/spek-window.cc:226
 msgid "All files"
 msgstr "Alle bestanden"
 
-#: ../src/spek-window.cc:234
+#: ../src/spek-window.cc:228
 msgid "Audio files"
 msgstr "Audiobestanden"
 
-#: ../src/spek-window.cc:248
+#: ../src/spek-window.cc:242
 msgid "Open File"
 msgstr "Bestand openen"
 
-#: ../src/spek-window.cc:270
+#: ../src/spek-window.cc:264
 msgid "PNG images"
 msgstr "PNG-afbeeldingen"
 
-#: ../src/spek-window.cc:276
+#: ../src/spek-window.cc:270
 msgid "Save Spectrogram"
 msgstr "Spectrogram opslaan"
 
 #. Suggested name is <file_name>.png
-#: ../src/spek-window.cc:284
+#: ../src/spek-window.cc:278
 msgid "Untitled"
 msgstr "Naamloos"
 
 #. TRANSLATORS: Add your name here
-#: ../src/spek-window.cc:331
+#: ../src/spek-window.cc:325
 msgid "translator-credits"
-msgstr "DutchDude (TheGuyOfDoom)\nWouter Bolsterlee\nAlexander Kojevnikov"
+msgstr "DutchDude (TheGuyOfDoom)\nWouter Bolsterlee\nAlexander Kojevnikov\nGabriel Secreve"
 
-#: ../src/spek-window.cc:337
+#: ../src/spek-window.cc:331
 msgid "Copyright (c) 2010-2013 Alexander Kojevnikov and contributors"
-msgstr ""
+msgstr "Copyright (c) 2010-2013 Alexander Kojevnikov en inzenders"
 
-#: ../src/spek-window.cc:340
+#: ../src/spek-window.cc:334
 msgid "Spek Website"
 msgstr "Spek-website"
 
 #. TRANSLATORS: the %s is the package version.
-#: ../src/spek.cc:96
+#: ../src/spek.cc:94
 #, c-format
 msgid "Spek version %s"
 msgstr "Spek versie %s"

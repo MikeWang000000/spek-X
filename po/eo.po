@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-11 10:26-0700\n"
-"PO-Revision-Date: 2013-11-20 10:50+0000\n"
+"POT-Creation-Date: 2014-03-29 13:05-0700\n"
+"PO-Revision-Date: 2017-09-19 12:44+0000\n"
 "Last-Translator: Alexander Kojevnikov <alexander@kojevnikov.com>\n"
-"Language-Team: Esperanto (http://www.transifex.com/projects/p/spek/language/eo/)\n"
+"Language-Team: Esperanto (http://www.transifex.com/spek/spek/language/eo/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -143,72 +143,72 @@ msgstr "-00 dB"
 msgid "Spek - Acoustic Spectrum Analyser"
 msgstr "Spek - Akustika Spektro Analizilo"
 
-#: ../src/spek-window.cc:95
+#: ../src/spek-window.cc:91
 msgid "&File"
 msgstr "&Dosiero"
 
-#: ../src/spek-window.cc:101
+#: ../src/spek-window.cc:97
 msgid "&Edit"
 msgstr "&Redakto"
 
-#: ../src/spek-window.cc:105 ../src/spek-window.cc:110
+#: ../src/spek-window.cc:101 ../src/spek-window.cc:106
 msgid "&Help"
 msgstr "&Helpo"
 
-#: ../src/spek-window.cc:133
+#: ../src/spek-window.cc:128
 msgid "Help"
 msgstr "Helpo"
 
-#: ../src/spek-window.cc:147
+#: ../src/spek-window.cc:141
 msgid "A new version of Spek is available, click to download."
 msgstr "Nova versio de Spek estas disponebla, klaku por elŝuti."
 
 #. TRANSLATORS: window title, %s is replaced with the file name
-#: ../src/spek-window.cc:185
+#: ../src/spek-window.cc:179
 #, c-format
 msgid "Spek - %s"
 msgstr "Spek - %s"
 
-#: ../src/spek-window.cc:232
+#: ../src/spek-window.cc:226
 msgid "All files"
 msgstr "Ĉiuj dosieroj"
 
-#: ../src/spek-window.cc:234
+#: ../src/spek-window.cc:228
 msgid "Audio files"
 msgstr "Sondosieroj"
 
-#: ../src/spek-window.cc:248
+#: ../src/spek-window.cc:242
 msgid "Open File"
 msgstr "Malfermi dosieron"
 
-#: ../src/spek-window.cc:270
+#: ../src/spek-window.cc:264
 msgid "PNG images"
 msgstr "PNG bildoj"
 
-#: ../src/spek-window.cc:276
+#: ../src/spek-window.cc:270
 msgid "Save Spectrogram"
 msgstr "Konservi spektron"
 
 #. Suggested name is <file_name>.png
-#: ../src/spek-window.cc:284
+#: ../src/spek-window.cc:278
 msgid "Untitled"
 msgstr "Sentitola"
 
 #. TRANSLATORS: Add your name here
-#: ../src/spek-window.cc:331
+#: ../src/spek-window.cc:325
 msgid "translator-credits"
 msgstr "Ryan Smith"
 
-#: ../src/spek-window.cc:337
+#: ../src/spek-window.cc:331
 msgid "Copyright (c) 2010-2013 Alexander Kojevnikov and contributors"
 msgstr "Kopirajto  (c) 2010-2013 Alexander Kojevnikov kaj kontribuistoj."
 
-#: ../src/spek-window.cc:340
+#: ../src/spek-window.cc:334
 msgid "Spek Website"
 msgstr "Spek Retejo"
 
 #. TRANSLATORS: the %s is the package version.
-#: ../src/spek.cc:96
+#: ../src/spek.cc:94
 #, c-format
 msgid "Spek version %s"
 msgstr "Spek versio %s"

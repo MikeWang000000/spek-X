@@ -3,24 +3,20 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Alexander Kojevnikov <alexander@kojevnikov.com>, 2011-2012
-# flz <inactive+flz@transifex.com>, 2011
-# FoeNyx <foenyx@free.fr>, 2011
-# PegHorse <peghorse@crdf.fr>, 2012
-# Vincent A <doezerx@gmail.com>, 2015
+# Aleksandar Todorović <aleksandar.todorovic@mail.ru>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-03-29 13:05-0700\n"
-"PO-Revision-Date: 2017-09-19 09:46+0000\n"
-"Last-Translator: Vincent A <doezerx@gmail.com>\n"
-"Language-Team: French (http://www.transifex.com/spek/spek/language/fr/)\n"
+"PO-Revision-Date: 2017-09-23 21:21+0000\n"
+"Last-Translator: Aleksandar Todorović <aleksandar.todorovic@mail.ru>\n"
+"Language-Team: Bosnian (http://www.transifex.com/spek/spek/language/bs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: bs\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../data/spek.desktop.in.in.h:1
 msgid "Spek"
@@ -28,15 +24,15 @@ msgstr "Spek"
 
 #: ../data/spek.desktop.in.in.h:2
 msgid "Spectrum Analyser"
-msgstr "Analyseur de Spectre"
+msgstr "Analizator spektra"
 
 #: ../data/spek.desktop.in.in.h:3
 msgid "View spectrograms of your audio files"
-msgstr "Voir les spectrogrammes de vos fichiers audio"
+msgstr "Pregledaj spektogram svojih audio datoteka"
 
 #: ../data/spek.desktop.in.in.h:4
 msgid "Spek Spectrum Analyser"
-msgstr "Analyseur de spectre Spek"
+msgstr "Spek analizator spektra"
 
 #: ../src/spek-pipeline.cc:197
 #, c-format
@@ -53,74 +49,76 @@ msgstr "%d Hz"
 msgid "%d bit"
 msgid_plural "%d bits"
 msgstr[0] "%d bit"
-msgstr[1] "%d bits"
+msgstr[1] "%d bita"
+msgstr[2] "%d bita"
 
 #: ../src/spek-pipeline.cc:217
 #, c-format
 msgid "%d channel"
 msgid_plural "%d channels"
-msgstr[0] "%d canal"
-msgstr[1] "%d canaux"
+msgstr[0] "%d kanal"
+msgstr[1] "%d kanala"
+msgstr[2] "%d kanala"
 
 #: ../src/spek-pipeline.cc:234
 msgid "Cannot open input file"
-msgstr "Impossible d'ouvrir le fichier"
+msgstr "Nije moguće otvoriti datoteku"
 
 #: ../src/spek-pipeline.cc:237
 msgid "Cannot find stream info"
-msgstr "Impossible de trouver les infos sur le flux audio"
+msgstr "Nije moguće pronaći informacije o stream-u"
 
 #: ../src/spek-pipeline.cc:240
 msgid "The file contains no audio streams"
-msgstr "Le fichier ne contient pas de flux audio"
+msgstr "Datoteka ne sadrži audio stream"
 
 #: ../src/spek-pipeline.cc:243
 msgid "Cannot find decoder"
-msgstr "Impossible de trouver de décodeurs"
+msgstr "Nije moguće pronaći dekoder"
 
 #: ../src/spek-pipeline.cc:246
 msgid "Unknown duration"
-msgstr "Durée inconnue"
+msgstr "Nepoznato trajanje"
 
 #: ../src/spek-pipeline.cc:249
 msgid "No audio channels"
-msgstr "Absence de canal audio"
+msgstr "Nema audio kanala"
 
 #: ../src/spek-pipeline.cc:252
 msgid "Cannot open decoder"
-msgstr "Impossible d'ouvrir le décodeur"
+msgstr "Nije moguće pokrenuti dekoder"
 
 #: ../src/spek-pipeline.cc:255
 msgid "Unsupported sample format"
-msgstr "Format d'échantillon sonore non pris en charge"
+msgstr "Format nije podržan"
 
 #. TRANSLATORS: first %s is the error message, second %s is stream
 #. description.
 #: ../src/spek-pipeline.cc:267
 #, c-format
 msgid "%s: %s"
-msgstr "%s : %s"
+msgstr "%s: %s"
 
 #: ../src/spek-preferences-dialog.cc:67
 msgid "Preferences"
-msgstr "Préférences"
+msgstr "Podešavanja"
 
 #: ../src/spek-preferences-dialog.cc:72
 msgid "(system default)"
-msgstr "(Valeur par défaut du système)"
+msgstr "(sistemski podrazumijevano)"
 
 #. TRANSLATORS: The name of a section in the Preferences dialog.
 #: ../src/spek-preferences-dialog.cc:79
 msgid "General"
-msgstr "Général"
+msgstr "Generalno"
 
 #: ../src/spek-preferences-dialog.cc:88
 msgid "Language:"
-msgstr "Langue:"
+msgstr "Jezik:"
 
 #: ../src/spek-preferences-dialog.cc:104
 msgid "Check for &updates"
-msgstr "Vérifier les &mises à jours"
+msgstr "Potraži &nadogradnje"
 
 #: ../src/spek-spectrogram.cc:191
 #, c-format
@@ -144,27 +142,27 @@ msgstr "-00 dB"
 
 #: ../src/spek-window.cc:75
 msgid "Spek - Acoustic Spectrum Analyser"
-msgstr "Spek - Analyseur de Spectre Acoustique"
+msgstr "Spek - Akustični analizator spektra"
 
 #: ../src/spek-window.cc:91
 msgid "&File"
-msgstr "&Fichier"
+msgstr "&Datoteka"
 
 #: ../src/spek-window.cc:97
 msgid "&Edit"
-msgstr "É&dition"
+msgstr "&Uredi"
 
 #: ../src/spek-window.cc:101 ../src/spek-window.cc:106
 msgid "&Help"
-msgstr "Aid&e"
+msgstr "&Pomoć"
 
 #: ../src/spek-window.cc:128
 msgid "Help"
-msgstr "Aide"
+msgstr "Pomoć"
 
 #: ../src/spek-window.cc:141
 msgid "A new version of Spek is available, click to download."
-msgstr "Une nouvelle version de Spek est disponible, cliquez pour la télécharger."
+msgstr "Dostupna je nova verzija Speka, kliknite da je preuzmete."
 
 #. TRANSLATORS: window title, %s is replaced with the file name
 #: ../src/spek-window.cc:179
@@ -174,44 +172,44 @@ msgstr "Spek - %s"
 
 #: ../src/spek-window.cc:226
 msgid "All files"
-msgstr "Tous les fichiers"
+msgstr "Sve datoteke"
 
 #: ../src/spek-window.cc:228
 msgid "Audio files"
-msgstr "Fichiers audio"
+msgstr "Audio datoteke"
 
 #: ../src/spek-window.cc:242
 msgid "Open File"
-msgstr "Ouvrir un fichier"
+msgstr "Otvori datoteku"
 
 #: ../src/spek-window.cc:264
 msgid "PNG images"
-msgstr "Images PNG"
+msgstr "PNG slike"
 
 #: ../src/spek-window.cc:270
 msgid "Save Spectrogram"
-msgstr "Sauvegarder le spectrogramme"
+msgstr "Sačuvaj spektogram"
 
 #. Suggested name is <file_name>.png
 #: ../src/spek-window.cc:278
 msgid "Untitled"
-msgstr "Sans titre"
+msgstr "Bez naslova"
 
 #. TRANSLATORS: Add your name here
 #: ../src/spek-window.cc:325
 msgid "translator-credits"
-msgstr "Florent Thoumie\nAlexander Kojevnikov"
+msgstr "zasluge-za-prevod"
 
 #: ../src/spek-window.cc:331
 msgid "Copyright (c) 2010-2013 Alexander Kojevnikov and contributors"
-msgstr "Copyright (c) 2010-2015 Alexander Kojevnikov et contributeurs."
+msgstr "Copyright (c) 2010-2013 Alexander Kojevnikov i ostali kontributori"
 
 #: ../src/spek-window.cc:334
 msgid "Spek Website"
-msgstr "Site web de Spek"
+msgstr "Spek web sajt"
 
 #. TRANSLATORS: the %s is the package version.
 #: ../src/spek.cc:94
 #, c-format
 msgid "Spek version %s"
-msgstr "Spek version %s"
+msgstr "Spek verzija %s"

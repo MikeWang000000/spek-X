@@ -3,24 +3,20 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Alexander Kojevnikov <alexander@kojevnikov.com>, 2011-2012
-# flz <inactive+flz@transifex.com>, 2011
-# FoeNyx <foenyx@free.fr>, 2011
-# PegHorse <peghorse@crdf.fr>, 2012
-# Vincent A <doezerx@gmail.com>, 2015
+# YAKIR RACHMANY <yakirra@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-03-29 13:05-0700\n"
-"PO-Revision-Date: 2017-09-19 09:46+0000\n"
-"Last-Translator: Vincent A <doezerx@gmail.com>\n"
-"Language-Team: French (http://www.transifex.com/spek/spek/language/fr/)\n"
+"PO-Revision-Date: 2017-09-23 20:29+0000\n"
+"Last-Translator: YAKIR RACHMANY <yakirra@gmail.com>\n"
+"Language-Team: Hebrew (http://www.transifex.com/spek/spek/language/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: he\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../data/spek.desktop.in.in.h:1
 msgid "Spek"
@@ -28,15 +24,15 @@ msgstr "Spek"
 
 #: ../data/spek.desktop.in.in.h:2
 msgid "Spectrum Analyser"
-msgstr "Analyseur de Spectre"
+msgstr "ספקטרום אנלייזר"
 
 #: ../data/spek.desktop.in.in.h:3
 msgid "View spectrograms of your audio files"
-msgstr "Voir les spectrogrammes de vos fichiers audio"
+msgstr "הצג ספקטרום מתוך קבצי השמע שלך"
 
 #: ../data/spek.desktop.in.in.h:4
 msgid "Spek Spectrum Analyser"
-msgstr "Analyseur de spectre Spek"
+msgstr "Spek Spectrum Analyser"
 
 #: ../src/spek-pipeline.cc:197
 #, c-format
@@ -59,68 +55,68 @@ msgstr[1] "%d bits"
 #, c-format
 msgid "%d channel"
 msgid_plural "%d channels"
-msgstr[0] "%d canal"
-msgstr[1] "%d canaux"
+msgstr[0] "%d channel"
+msgstr[1] "%d channels"
 
 #: ../src/spek-pipeline.cc:234
 msgid "Cannot open input file"
-msgstr "Impossible d'ouvrir le fichier"
+msgstr "לא ניתן לפתוח קובץ זה"
 
 #: ../src/spek-pipeline.cc:237
 msgid "Cannot find stream info"
-msgstr "Impossible de trouver les infos sur le flux audio"
+msgstr "לא ניתן למצוא מידע זרימה"
 
 #: ../src/spek-pipeline.cc:240
 msgid "The file contains no audio streams"
-msgstr "Le fichier ne contient pas de flux audio"
+msgstr "הקובץ אינו מכיל ערוצי שמע"
 
 #: ../src/spek-pipeline.cc:243
 msgid "Cannot find decoder"
-msgstr "Impossible de trouver de décodeurs"
+msgstr "לא ניתן למצוא מקודד"
 
 #: ../src/spek-pipeline.cc:246
 msgid "Unknown duration"
-msgstr "Durée inconnue"
+msgstr "אורך לא ידוע"
 
 #: ../src/spek-pipeline.cc:249
 msgid "No audio channels"
-msgstr "Absence de canal audio"
+msgstr "אין ערוצי שמע"
 
 #: ../src/spek-pipeline.cc:252
 msgid "Cannot open decoder"
-msgstr "Impossible d'ouvrir le décodeur"
+msgstr "לא ניתן לפתוח קידוד זה"
 
 #: ../src/spek-pipeline.cc:255
 msgid "Unsupported sample format"
-msgstr "Format d'échantillon sonore non pris en charge"
+msgstr "פורמט דגימה לא נתמך"
 
 #. TRANSLATORS: first %s is the error message, second %s is stream
 #. description.
 #: ../src/spek-pipeline.cc:267
 #, c-format
 msgid "%s: %s"
-msgstr "%s : %s"
+msgstr "%s: %s"
 
 #: ../src/spek-preferences-dialog.cc:67
 msgid "Preferences"
-msgstr "Préférences"
+msgstr "הגדרות"
 
 #: ../src/spek-preferences-dialog.cc:72
 msgid "(system default)"
-msgstr "(Valeur par défaut du système)"
+msgstr "(מערכת ברירת המחדל)"
 
 #. TRANSLATORS: The name of a section in the Preferences dialog.
 #: ../src/spek-preferences-dialog.cc:79
 msgid "General"
-msgstr "Général"
+msgstr "ראשי"
 
 #: ../src/spek-preferences-dialog.cc:88
 msgid "Language:"
-msgstr "Langue:"
+msgstr "שפה:"
 
 #: ../src/spek-preferences-dialog.cc:104
 msgid "Check for &updates"
-msgstr "Vérifier les &mises à jours"
+msgstr "בדוק &עדכונים"
 
 #: ../src/spek-spectrogram.cc:191
 #, c-format
@@ -144,27 +140,27 @@ msgstr "-00 dB"
 
 #: ../src/spek-window.cc:75
 msgid "Spek - Acoustic Spectrum Analyser"
-msgstr "Spek - Analyseur de Spectre Acoustique"
+msgstr "Spek - Acoustic Spectrum Analyser"
 
 #: ../src/spek-window.cc:91
 msgid "&File"
-msgstr "&Fichier"
+msgstr "&קובץ"
 
 #: ../src/spek-window.cc:97
 msgid "&Edit"
-msgstr "É&dition"
+msgstr "&עריכה"
 
 #: ../src/spek-window.cc:101 ../src/spek-window.cc:106
 msgid "&Help"
-msgstr "Aid&e"
+msgstr "&עזרה"
 
 #: ../src/spek-window.cc:128
 msgid "Help"
-msgstr "Aide"
+msgstr "עזרה"
 
 #: ../src/spek-window.cc:141
 msgid "A new version of Spek is available, click to download."
-msgstr "Une nouvelle version de Spek est disponible, cliquez pour la télécharger."
+msgstr "גרסה חדשה זמינה, לחץ להורדה."
 
 #. TRANSLATORS: window title, %s is replaced with the file name
 #: ../src/spek-window.cc:179
@@ -174,44 +170,44 @@ msgstr "Spek - %s"
 
 #: ../src/spek-window.cc:226
 msgid "All files"
-msgstr "Tous les fichiers"
+msgstr "כל הקבצים"
 
 #: ../src/spek-window.cc:228
 msgid "Audio files"
-msgstr "Fichiers audio"
+msgstr "קבצי שמע"
 
 #: ../src/spek-window.cc:242
 msgid "Open File"
-msgstr "Ouvrir un fichier"
+msgstr "פתח קובץ"
 
 #: ../src/spek-window.cc:264
 msgid "PNG images"
-msgstr "Images PNG"
+msgstr "תמונות PNG"
 
 #: ../src/spek-window.cc:270
 msgid "Save Spectrogram"
-msgstr "Sauvegarder le spectrogramme"
+msgstr "שמור ספקטרום"
 
 #. Suggested name is <file_name>.png
 #: ../src/spek-window.cc:278
 msgid "Untitled"
-msgstr "Sans titre"
+msgstr "ללא כותרת"
 
 #. TRANSLATORS: Add your name here
 #: ../src/spek-window.cc:325
 msgid "translator-credits"
-msgstr "Florent Thoumie\nAlexander Kojevnikov"
+msgstr "קרדיטים-למתרגמים"
 
 #: ../src/spek-window.cc:331
 msgid "Copyright (c) 2010-2013 Alexander Kojevnikov and contributors"
-msgstr "Copyright (c) 2010-2015 Alexander Kojevnikov et contributeurs."
+msgstr "כל הזכויות שמורות: (c) 2010-2013 \nאלכסנדר קוג'בניקוב והכותבים"
 
 #: ../src/spek-window.cc:334
 msgid "Spek Website"
-msgstr "Site web de Spek"
+msgstr "Spek אתר הבית"
 
 #. TRANSLATORS: the %s is the package version.
 #: ../src/spek.cc:94
 #, c-format
 msgid "Spek version %s"
-msgstr "Spek version %s"
+msgstr "Spek גרסה %s"

@@ -1,5 +1,6 @@
 # please keep this list sorted alphabetically
 #
+bs
 ca
 cs
 da
@@ -10,8 +11,12 @@ es
 fi
 fr
 gl
+he
+hu
+id
 it
 ja
+ko
 lv
 nb
 nl
@@ -21,6 +26,7 @@ ru
 sk
 sr@latin
 sv
+th
 tr
 uk
 vi

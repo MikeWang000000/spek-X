@@ -8,6 +8,7 @@
 static const char *available_languages[] =
 {
     "", "",
+    "bs", "Bosanski",
     "ca", "Català",
     "cs", "Čeština",
     "da", "Dansk",
@@ -19,8 +20,12 @@ static const char *available_languages[] =
     "fi", "Suomi",
     "fr", "Français",
     "gl", "Galego",
+    "he", "עִבְרִית",
+    "hu", "Magyar nyelv",
+    "id", "Bahasa Indonesia",
     "it", "Italiano",
     "ja", "日本語",
+    "ko", "한국어/韓國語",
     "lv", "Latviešu",
     "nb", "Norsk (bokmål)",
     "nl", "Nederlands",
@@ -30,6 +35,7 @@ static const char *available_languages[] =
     "sk", "Slovenčina",
     "sr@latin", "Srpski",
     "sv", "Svenska",
+    "th", "ภาษาไทย",
     "tr", "Türkçe",
     "uk", "Українська",
     "vi", "Tiếng Việt",

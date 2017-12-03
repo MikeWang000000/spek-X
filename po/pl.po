@@ -4,20 +4,20 @@
 # 
 # Translators:
 # Alexander Kojevnikov <alexander@kojevnikov.com>, 2012
-# Piotr Drąg <piotrdrag@gmail.com>, 2011-2013
+# Piotr Drąg <piotrdrag@gmail.com>, 2011-2013,2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Spek\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-11 10:26-0700\n"
-"PO-Revision-Date: 2013-11-20 10:50+0000\n"
-"Last-Translator: Alexander Kojevnikov <alexander@kojevnikov.com>\n"
-"Language-Team: Polish (http://www.transifex.com/projects/p/spek/language/pl/)\n"
+"POT-Creation-Date: 2014-03-29 13:05-0700\n"
+"PO-Revision-Date: 2017-09-19 09:46+0000\n"
+"Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
+"Language-Team: Polish (http://www.transifex.com/spek/spek/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: pl\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 #: ../data/spek.desktop.in.in.h:1
 msgid "Spek"
@@ -52,6 +52,7 @@ msgid_plural "%d bits"
 msgstr[0] "%d bit"
 msgstr[1] "%d bity"
 msgstr[2] "%d bitów"
+msgstr[3] "%d bitów"
 
 #: ../src/spek-pipeline.cc:217
 #, c-format
@@ -60,6 +61,7 @@ msgid_plural "%d channels"
 msgstr[0] "%d kanał"
 msgstr[1] "%d kanały"
 msgstr[2] "%d kanałów"
+msgstr[3] "%d kanałów"
 
 #: ../src/spek-pipeline.cc:234
 msgid "Cannot open input file"
@@ -143,74 +145,74 @@ msgstr "-00 dB"
 
 #: ../src/spek-window.cc:75
 msgid "Spek - Acoustic Spectrum Analyser"
-msgstr "Spek - analizator widma akustycznego"
+msgstr "Spek — analizator widma akustycznego"
 
-#: ../src/spek-window.cc:95
+#: ../src/spek-window.cc:91
 msgid "&File"
 msgstr "&Plik"
 
-#: ../src/spek-window.cc:101
+#: ../src/spek-window.cc:97
 msgid "&Edit"
 msgstr "&Edycja"
 
-#: ../src/spek-window.cc:105 ../src/spek-window.cc:110
+#: ../src/spek-window.cc:101 ../src/spek-window.cc:106
 msgid "&Help"
 msgstr "Pomo&c"
 
-#: ../src/spek-window.cc:133
+#: ../src/spek-window.cc:128
 msgid "Help"
 msgstr "Pomoc"
 
-#: ../src/spek-window.cc:147
+#: ../src/spek-window.cc:141
 msgid "A new version of Spek is available, click to download."
 msgstr "Dostępna jest nowa wersja programu Spek.  Proszę kliknąć, aby ją pobrać."
 
 #. TRANSLATORS: window title, %s is replaced with the file name
-#: ../src/spek-window.cc:185
+#: ../src/spek-window.cc:179
 #, c-format
 msgid "Spek - %s"
-msgstr "Spek - %s"
+msgstr "Spek — %s"
 
-#: ../src/spek-window.cc:232
+#: ../src/spek-window.cc:226
 msgid "All files"
 msgstr "Wszystkie pliki"
 
-#: ../src/spek-window.cc:234
+#: ../src/spek-window.cc:228
 msgid "Audio files"
 msgstr "Pliki dźwiękowe"
 
-#: ../src/spek-window.cc:248
+#: ../src/spek-window.cc:242
 msgid "Open File"
 msgstr "Otwarcie pliku"
 
-#: ../src/spek-window.cc:270
+#: ../src/spek-window.cc:264
 msgid "PNG images"
 msgstr "Obrazy PNG"
 
-#: ../src/spek-window.cc:276
+#: ../src/spek-window.cc:270
 msgid "Save Spectrogram"
 msgstr "Zapis spektogramu"
 
 #. Suggested name is <file_name>.png
-#: ../src/spek-window.cc:284
+#: ../src/spek-window.cc:278
 msgid "Untitled"
 msgstr "Bez tytułu"
 
 #. TRANSLATORS: Add your name here
-#: ../src/spek-window.cc:331
+#: ../src/spek-window.cc:325
 msgid "translator-credits"
-msgstr "Piotr Drąg <piotrdrag@gmail.com>, 2011"
+msgstr "Piotr Drąg <piotrdrag@gmail.com>, 2011, 2015"
 
-#: ../src/spek-window.cc:337
+#: ../src/spek-window.cc:331
 msgid "Copyright (c) 2010-2013 Alexander Kojevnikov and contributors"
-msgstr "Copyright (c) 2010-2013 Alexander Kojevnikov i współtwórcy"
+msgstr "Copyright © 2010-2013 Alexander Kojevnikov i współtwórcy"
 
-#: ../src/spek-window.cc:340
+#: ../src/spek-window.cc:334
 msgid "Spek Website"
 msgstr "Witryna programu Spek"
 
 #. TRANSLATORS: the %s is the package version.
-#: ../src/spek.cc:96
+#: ../src/spek.cc:94
 #, c-format
 msgid "Spek version %s"
 msgstr "Spek wersja %s"
