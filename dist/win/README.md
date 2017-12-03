@@ -8,7 +8,7 @@ This is done in two steps:
 For the first step you can use any Unix-y environment. Set up
 [MXE](http://mxe.cc/#tutorial).
 
-Clone mxe from my fork created specifically for building Spek:
+Clone mxe from my fork created specifically for building Spek into `/opt/mxe-spek`:
 
     git clone -b mxe-spek https://github.com/withmorten/mxe/ mxe-spek
 
