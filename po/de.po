@@ -120,6 +120,10 @@ msgstr "Sprache:"
 msgid "Check for &updates"
 msgstr "Nach &Aktualisierungen suchen"
 
+#: ../src/spek-preferences-dialog.cc:99
+msgid "Hide full &path"
+msgstr "Nur &Dateinamen anzeigen"
+
 #: ../src/spek-spectrogram.cc:191
 #, c-format
 msgid "%d kHz"

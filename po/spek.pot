@@ -117,6 +117,10 @@ msgstr ""
 msgid "Check for &updates"
 msgstr ""
 
+#: ../src/spek-preferences-dialog.cc:99
+msgid "Hide full &path"
+msgstr ""
+
 #: ../src/spek-spectrogram.cc:191
 #, c-format
 msgid "%d kHz"

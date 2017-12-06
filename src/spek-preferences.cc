@@ -80,3 +80,16 @@ void SpekPreferences::set_language(const wxString& value)
     this->config->Write("/general/language", value);
     this->config->Flush();
 }
+
+bool SpekPreferences::get_hide_full_path()
+{
+    bool result = false;
+    this->config->Read("/general/hidepath", &result);
+    return result;
+}
+
+void SpekPreferences::set_hide_full_path(bool value)
+{
+    this->config->Write("/general/hidepath", value);
+    this->config->Flush();
+}

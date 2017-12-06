@@ -1,11 +1,13 @@
 #include <cmath>
 
 #include <wx/dcbuffer.h>
+#include <wx/filename.h>
 
 #include "spek-audio.h"
 #include "spek-events.h"
 #include "spek-fft.h"
 #include "spek-platform.h"
+#include "spek-preferences.h"
 #include "spek-ruler.h"
 #include "spek-utils.h"
 
@@ -91,16 +93,6 @@ void SpekSpectrogram::save(const wxString& path)
 void SpekSpectrogram::on_char(wxKeyEvent& evt)
 {
     switch (evt.GetKeyCode()) {
-    // case 'c':
-        // if (this->channels) {
-            // this->channel = (this->channel + 1) % this->channels;
-        // }
-        // break;
-    // case 'C':
-        // if (this->channels) {
-            // this->channel = (this->channel - 1 + this->channels) % this->channels;
-        // }
-        // break;
     case 'f':
         this->window_function = (enum window_function) ((this->window_function + 1) % WINDOW_COUNT);
         break;
@@ -282,9 +274,18 @@ void SpekSpectrogram::render(wxDC& dc)
         dc.DrawBitmap(bmp, LPAD, TPAD);
 
         // File name.
+        // Checking prefs can probably be solved differently.
+        SpekPreferences& prefs = SpekPreferences::get();
+        wxString file_name = this->path;
+
+        if (prefs.get_hide_full_path()) {
+            wxFileName file_path(this->path);
+            file_name = file_path.GetFullName();
+        }
+
         dc.SetFont(large_font);
         dc.DrawText(
-            trim(dc, this->path, w - LPAD - RPAD, false),
+            trim(dc, file_name, w - LPAD - RPAD, false),
             LPAD,
             TPAD - 2 * GAP - normal_height - large_height
         );

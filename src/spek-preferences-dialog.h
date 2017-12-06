@@ -9,7 +9,8 @@ public:
 
 private:
     void on_language(wxCommandEvent& event);
-    void on_check(wxCommandEvent& event);
+    void on_check_update(wxCommandEvent& event);
+    void on_check_hide_full_path(wxCommandEvent& event);
 
     wxArrayString languages;
 

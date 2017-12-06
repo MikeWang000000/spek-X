@@ -45,11 +45,13 @@ static const char *available_languages[] =
 };
 
 #define ID_LANGUAGE (wxID_HIGHEST + 1)
-#define ID_CHECK (wxID_HIGHEST + 2)
+#define ID_CHECK_UPDATE (wxID_HIGHEST + 2)
+#define ID_CHECK_FULL_PATH (wxID_HIGHEST + 3)
 
 BEGIN_EVENT_TABLE(SpekPreferencesDialog, wxDialog)
     EVT_CHOICE(ID_LANGUAGE, SpekPreferencesDialog::on_language)
-    EVT_CHECKBOX(ID_CHECK, SpekPreferencesDialog::on_check)
+    EVT_CHECKBOX(ID_CHECK_UPDATE, SpekPreferencesDialog::on_check_update)
+    EVT_CHECKBOX(ID_CHECK_FULL_PATH, SpekPreferencesDialog::on_check_hide_full_path)
 END_EVENT_TABLE()
 
 SpekPreferencesDialog::SpekPreferencesDialog(wxWindow *parent) :
@@ -90,9 +92,13 @@ SpekPreferencesDialog::SpekPreferencesDialog(wxWindow *parent) :
         language_choice->SetSelection(active_index);
     }
 
-    wxCheckBox *check_update = new wxCheckBox(this, ID_CHECK, _("Check for &updates"));
-    inner_sizer->Add(check_update, 0 ,wxLEFT | wxTOP, 12);
+    wxCheckBox *check_update = new wxCheckBox(this, ID_CHECK_UPDATE, _("Check for &updates"));
+    inner_sizer->Add(check_update, 0, wxLEFT | wxTOP, 12);
     check_update->SetValue(SpekPreferences::get().get_check_update());
+
+    wxCheckBox *hide_full_path = new wxCheckBox(this, ID_CHECK_FULL_PATH, _("Hide full &path"));
+    inner_sizer->Add(hide_full_path, 0, wxLEFT | wxTOP, 12);
+    hide_full_path->SetValue(SpekPreferences::get().get_hide_full_path());
 
     sizer->Add(CreateButtonSizer(wxOK), 0, wxALIGN_RIGHT | wxBOTTOM | wxRIGHT, 12);
     sizer->SetSizeHints(this);
@@ -104,7 +110,12 @@ void SpekPreferencesDialog::on_language(wxCommandEvent& event)
     SpekPreferences::get().set_language(this->languages[event.GetSelection() * 2]);
 }
 
-void SpekPreferencesDialog::on_check(wxCommandEvent& event)
+void SpekPreferencesDialog::on_check_update(wxCommandEvent& event)
 {
     SpekPreferences::get().set_check_update(event.IsChecked());
+}
+
+void SpekPreferencesDialog::on_check_hide_full_path(wxCommandEvent& event)
+{
+    SpekPreferences::get().set_hide_full_path(event.IsChecked());
 }
