@@ -17,6 +17,8 @@ public:
     void set_language(const wxString& value);
     bool get_hide_full_path();
     void set_hide_full_path(bool value);
+    bool get_show_detailed_description();
+    void set_show_detailed_description(bool value);
 
 private:
     SpekPreferences();

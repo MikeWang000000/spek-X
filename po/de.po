@@ -124,6 +124,10 @@ msgstr "Nach &Aktualisierungen suchen"
 msgid "Hide full &path"
 msgstr "Nur &Dateinamen anzeigen"
 
+#: ../src/spek-preferences-dialog.cc:105
+msgid "Show detailed &description"
+msgstr "Detaillierte &Beschreibung anzeigen"
+
 #: ../src/spek-spectrogram.cc:191
 #, c-format
 msgid "%d kHz"

@@ -11,6 +11,7 @@
 
 #include "spek-audio.h"
 #include "spek-fft.h"
+#include "spek-preferences.h"
 
 #include "spek-pipeline.h"
 
@@ -205,27 +206,32 @@ std::string spek_pipeline_desc(const struct spek_pipeline *pipeline)
         ));
     }
 
-    // if (pipeline->file->get_error() == AudioError::OK) {
-        // items.push_back(std::string(wxString::Format(wxT("W:%i"), pipeline->nfft).utf8_str()));
+    // Checking prefs can probably be solved differently.
+    SpekPreferences& prefs = SpekPreferences::get();
 
-        // std::string window_function_name;
-        // switch (pipeline->window_function) {
-        // case WINDOW_HANN:
-            // window_function_name = std::string("Hann");
-            // break;
-        // case WINDOW_HAMMING:
-            // window_function_name = std::string("Hamming");
-            // break;
-        // case WINDOW_BLACKMAN_HARRIS:
-            // window_function_name = std::string("Blackman-Harris");
-            // break;
-        // default:
-            // assert(false);
-        // }
-        // if (window_function_name.size()) {
-            // items.push_back("F:" + window_function_name);
-        // }
-    // }
+    if(prefs.get_show_detailed_description()) {
+        if (pipeline->file->get_error() == AudioError::OK) {
+            items.push_back(std::string(wxString::Format(wxT("W:%i"), pipeline->nfft).utf8_str()));
+
+            std::string window_function_name;
+            switch (pipeline->window_function) {
+            case WINDOW_HANN:
+                window_function_name = std::string("Hann");
+                break;
+            case WINDOW_HAMMING:
+                window_function_name = std::string("Hamming");
+                break;
+            case WINDOW_BLACKMAN_HARRIS:
+                window_function_name = std::string("Blackman-Harris");
+                break;
+            default:
+                assert(false);
+            }
+            if (window_function_name.size()) {
+                items.push_back("F:" + window_function_name);
+            }
+        }
+    }
 
     std::string desc;
     for (const auto& item : items) {

@@ -93,3 +93,16 @@ void SpekPreferences::set_hide_full_path(bool value)
     this->config->Write("/general/hidepath", value);
     this->config->Flush();
 }
+
+bool SpekPreferences::get_show_detailed_description()
+{
+    bool result = false;
+    this->config->Read("/general/showdetails", &result);
+    return result;
+}
+
+void SpekPreferences::set_show_detailed_description(bool value)
+{
+    this->config->Write("/general/showdetails", value);
+    this->config->Flush();
+}

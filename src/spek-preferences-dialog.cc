@@ -47,11 +47,13 @@ static const char *available_languages[] =
 #define ID_LANGUAGE (wxID_HIGHEST + 1)
 #define ID_CHECK_UPDATE (wxID_HIGHEST + 2)
 #define ID_CHECK_FULL_PATH (wxID_HIGHEST + 3)
+#define ID_CHECK_DETAILED_DESCRIPTION (wxID_HIGHEST + 4)
 
 BEGIN_EVENT_TABLE(SpekPreferencesDialog, wxDialog)
     EVT_CHOICE(ID_LANGUAGE, SpekPreferencesDialog::on_language)
     EVT_CHECKBOX(ID_CHECK_UPDATE, SpekPreferencesDialog::on_check_update)
     EVT_CHECKBOX(ID_CHECK_FULL_PATH, SpekPreferencesDialog::on_check_hide_full_path)
+    EVT_CHECKBOX(ID_CHECK_DETAILED_DESCRIPTION, SpekPreferencesDialog::on_check_show_detailed_description)
 END_EVENT_TABLE()
 
 SpekPreferencesDialog::SpekPreferencesDialog(wxWindow *parent) :
@@ -100,6 +102,10 @@ SpekPreferencesDialog::SpekPreferencesDialog(wxWindow *parent) :
     inner_sizer->Add(hide_full_path, 0, wxLEFT | wxTOP, 12);
     hide_full_path->SetValue(SpekPreferences::get().get_hide_full_path());
 
+    wxCheckBox *show_detailed_description = new wxCheckBox(this, ID_CHECK_DETAILED_DESCRIPTION, _("Show detailed &description"));
+    inner_sizer->Add(show_detailed_description, 0, wxLEFT | wxTOP, 12);
+    show_detailed_description->SetValue(SpekPreferences::get().get_show_detailed_description());
+
     sizer->Add(CreateButtonSizer(wxOK), 0, wxALIGN_RIGHT | wxBOTTOM | wxRIGHT, 12);
     sizer->SetSizeHints(this);
     SetSizer(sizer);
@@ -118,4 +124,9 @@ void SpekPreferencesDialog::on_check_update(wxCommandEvent& event)
 void SpekPreferencesDialog::on_check_hide_full_path(wxCommandEvent& event)
 {
     SpekPreferences::get().set_hide_full_path(event.IsChecked());
+}
+
+void SpekPreferencesDialog::on_check_show_detailed_description(wxCommandEvent& event)
+{
+    SpekPreferences::get().set_show_detailed_description(event.IsChecked());
 }
