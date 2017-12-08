@@ -1,4 +1,4 @@
-% SPEK(1) User's Guide | Version 0.8.2.2
+% SPEK(1) User's Guide | Version 0.8.2.3
 %
 % 2013-04-18
 
