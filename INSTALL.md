@@ -28,14 +28,11 @@ Spek requires OS X 10.5+ and an Intel-based Mac.
  * Gentoo: [media-sound/spek](https://packages.gentoo.org/packages/media-sound/spek)
  * Ubuntu: [spek](http://packages.ubuntu.com/search?keywords=spek)
 
-### Building from the tarball
+### Building from the git repository
 
-To build Spek, download the source code tarball then run these commands from
-terminal:
-
-    tar -xvf spek-0.8.2.tar.xz
-    cd spek-0.8.2
-    ./configure
+    git clone git://github.com/withmorten/spek-alternative.git
+    cd spek
+    ./autogen.sh
     make
 
 To build you will need wxWidgets and FFmpeg packages. On Debian/Ubuntu you also
@@ -50,9 +47,3 @@ Or install it with:
 
     sudo make install
 
-### Building from the git repository
-
-    git clone git://github.com/alexkay/spek.git
-    cd spek
-    ./autogen.sh
-    make

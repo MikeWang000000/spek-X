@@ -7,13 +7,11 @@ Spek is available on *BSD, GNU/Linux, Windows and Mac OS X.
 
 Find out more about Spek on its website: <http://spek.cc/>
 
-## Spek 0.8.2 - Released 2013-02-24
+## Spek 0.8.2.3 - Released 2017-12-08
 
 ### New Features And Enhancements
 
-Spek 0.8.2 is part of beta 0.x releases, leading up to a stable 1.0 release
-(hopefully) later this year. The roadmap is available on
-[GitHub](https://github.com/alexkay/spek/milestones).
+Spek 0.8.2.3 is a fork of the original Spek.
 
 New features since 0.7:
 
@@ -52,17 +50,17 @@ Bugfixes:
 
 Spek 0.8.2 tarball:
 
- * <https://github.com/alexkay/spek/releases/download/v0.8.2/spek-0.8.2.tar.xz>
+ * <https://github.com/withmorten/spek-alternative/archive/0.8.2.3.tar.gz>
 
 Windows and Mac OS X binaries:
 
- * <https://github.com/alexkay/spek/releases/download/v0.8.2/spek-0.8.2.msi>
- * <https://github.com/alexkay/spek/releases/download/v0.8.2/spek-0.8.2.zip>
- * <https://github.com/alexkay/spek/releases/download/v0.8.2/spek-0.8.2.dmg>
+ * <https://github.com/withmorten/spek-alternative/releases/download/0.8.2.3/spek-alternative-0.8.2.3.msi>
+ * <https://github.com/withmorten/spek-alternative/releases/download/0.8.2.3/spek-alternative-0.8.2.3.zip>
+ * <https://github.com/withmorten/spek-alternative/releases/download/0.8.2.3/spek-alternative-0.8.2.3.dmg>
 
 Unix packages:
 
- * <https://github.com/alexkay/spek/blob/master/INSTALL.md#bsd-and-gnulinux>
+ * <https://github.com/withmorten/spek-alternative/blob/master/INSTALL.md#bsd-and-gnulinux>
 
 ### Dependencies
 
