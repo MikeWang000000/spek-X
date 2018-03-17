@@ -316,7 +316,10 @@ void SpekWindow::on_about(wxCommandEvent&)
     info.SetCopyright(_("Copyright (c) 2010-2013 Alexander Kojevnikov and contributors"));
     info.SetDescription(this->description);
 #ifdef OS_UNIX
-    info.SetWebSite("http://spek.cc/", _("Spek Website"));
+    info.SetWebSite(
+        wxString::Format("https://github.com/withmorten/spek/blob/release/%s/MANUAL.md", PACKAGE_VERSION),
+        _("Spek Website")
+    );
     info.SetIcon(wxArtProvider::GetIcon("spek", wxART_OTHER, wxSize(128, 128)));
 #endif
     wxAboutBox(info);
