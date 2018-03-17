@@ -19,6 +19,8 @@ public:
     void set_hide_full_path(bool value);
     bool get_show_detailed_description();
     void set_show_detailed_description(bool value);
+    int get_window_width();
+    int get_window_height();
 
 private:
     SpekPreferences();

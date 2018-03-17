@@ -106,3 +106,17 @@ void SpekPreferences::set_show_detailed_description(bool value)
     this->config->Write("/general/showdetails", value);
     this->config->Flush();
 }
+
+int SpekPreferences::get_window_width()
+{
+    int result = 640;
+    this->config->Read("/general/width", &result);
+    return result;
+}
+
+int SpekPreferences::get_window_height()
+{
+    int result = 480;
+    this->config->Read("/general/height", &result);
+    return result;
+}

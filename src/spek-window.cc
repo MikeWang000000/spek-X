@@ -51,8 +51,8 @@ private:
     SpekWindow *window;
 };
 
-SpekWindow::SpekWindow(const wxString& path) :
-    wxFrame(NULL, -1, wxEmptyString, wxDefaultPosition, wxSize(640, 480)), path(path)
+SpekWindow::SpekWindow(int width, int height, const wxString& path) :
+    wxFrame(NULL, -1, wxEmptyString, wxDefaultPosition, wxSize(width, height)), path(path)
 {
     this->description = _("Spek - Acoustic Spectrum Analyser");
     SetTitle(this->description);

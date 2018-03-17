@@ -82,7 +82,10 @@ bool Spek::OnInit()
         this->path = parser.GetParam();
     }
 
-    this->window = new SpekWindow(this->path);
+    // Checking prefs can probably be solved differently.
+    SpekPreferences& prefs = SpekPreferences::get();
+
+    this->window = new SpekWindow(prefs.get_window_width(), prefs.get_window_height(), this->path);
     this->window->Show(true);
     SetTopWindow(this->window);
     return true;
