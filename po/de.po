@@ -121,7 +121,7 @@ msgid "Check for &updates"
 msgstr "Nach &Aktualisierungen suchen"
 
 #: ../src/spek-preferences-dialog.cc:99
-msgid "Hide full &path"
+msgid "Show &filename only"
 msgstr "Nur &Dateinamen anzeigen"
 
 #: ../src/spek-preferences-dialog.cc:105

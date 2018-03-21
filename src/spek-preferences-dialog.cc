@@ -98,7 +98,7 @@ SpekPreferencesDialog::SpekPreferencesDialog(wxWindow *parent) :
     inner_sizer->Add(check_update, 0, wxLEFT | wxTOP, 12);
     check_update->SetValue(SpekPreferences::get().get_check_update());
 
-    wxCheckBox *hide_full_path = new wxCheckBox(this, ID_CHECK_FULL_PATH, _("Hide full &path"));
+    wxCheckBox *hide_full_path = new wxCheckBox(this, ID_CHECK_FULL_PATH, _("Show &filename only"));
     inner_sizer->Add(hide_full_path, 0, wxLEFT | wxTOP, 12);
     hide_full_path->SetValue(SpekPreferences::get().get_hide_full_path());
 
