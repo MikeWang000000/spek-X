@@ -289,7 +289,7 @@ void SpekWindow::on_preferences(wxCommandEvent&)
 void SpekWindow::on_help(wxCommandEvent&)
 {
     wxLaunchDefaultBrowser(
-        wxString::Format("https://github.com/withmorten/spek/blob/release/%s/MANUAL.md", PACKAGE_VERSION)
+        wxString::Format("https://github.com/withmorten/spek-alternative/blob/release/%s/MANUAL.md", PACKAGE_VERSION)
     );
 }
 
@@ -317,7 +317,7 @@ void SpekWindow::on_about(wxCommandEvent&)
     info.SetDescription(this->description);
 #ifdef OS_UNIX
     info.SetWebSite(
-        wxString::Format("https://github.com/withmorten/spek/blob/release/%s/MANUAL.md", PACKAGE_VERSION),
+        wxString::Format("https://github.com/withmorten/spek-alternative/blob/release/%s/MANUAL.md", PACKAGE_VERSION),
         _("Spek Website")
     );
     info.SetIcon(wxArtProvider::GetIcon("spek", wxART_OTHER, wxSize(128, 128)));
@@ -333,7 +333,7 @@ void SpekWindow::on_notify(wxCommandEvent&)
 
 void SpekWindow::on_visit(wxCommandEvent&)
 {
-    wxLaunchDefaultBrowser("https://github.com/withmorten/spek/releases");
+    wxLaunchDefaultBrowser("https://github.com/withmorten/spek-alternative/releases");
 }
 
 void SpekWindow::on_close(wxCommandEvent& event)
