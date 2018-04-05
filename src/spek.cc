@@ -62,19 +62,28 @@ bool Spek::OnInit()
         wxCMD_LINE_DESC_END,
     };
 
+    wxMessageOutput *msgout = wxMessageOutput::Get();
     wxCmdLineParser parser(desc, argc, argv);
     int ret = parser.Parse(true);
     if (ret == 1) {
+#ifndef OS_WIN
+        msgout->Printf("\n");
+#endif
         return false;
     }
     if (ret == -1) {
+#ifndef OS_WIN
+        msgout->Printf("\n");
+#endif
         this->quit = true;
         return true;
     }
     if (parser.Found("version")) {
         // TRANSLATORS: the %s is the package version.
-        wxPrintf(_("Spek version %s"), PACKAGE_VERSION);
-        wxPrintf("\n");
+        msgout->Printf(_("Spek version %s"), PACKAGE_VERSION);
+#ifndef OS_WIN
+        msgout->Printf("\n");
+#endif
         this->quit = true;
         return true;
     }
