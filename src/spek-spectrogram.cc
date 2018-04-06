@@ -73,9 +73,10 @@ SpekSpectrogram::~SpekSpectrogram()
     this->stop();
 }
 
-void SpekSpectrogram::open(const wxString& path)
+void SpekSpectrogram::open(const wxString& path, const wxString& pngpath)
 {
     this->path = path;
+    this->pngpath = pngpath;
     this->stream = 0;
     start();
     Refresh();
@@ -180,6 +181,12 @@ void SpekSpectrogram::on_have_sample(SpekHaveSampleEvent& event)
 
     if (sample == -1) {
         this->stop();
+
+        if (!this->pngpath.IsEmpty()) {
+            this->save(this->pngpath);
+            this->GetParent()->Close(true);
+        }
+
         return;
     }
 

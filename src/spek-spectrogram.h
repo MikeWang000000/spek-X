@@ -17,7 +17,7 @@ class SpekSpectrogram : public wxWindow
 public:
     SpekSpectrogram(wxFrame *parent);
     ~SpekSpectrogram();
-    void open(const wxString& path);
+    void open(const wxString& path, const wxString& pngpath);
     void save(const wxString& path);
 
 private:
@@ -39,6 +39,7 @@ private:
     int stream;
     enum window_function window_function;
     wxString path;
+    wxString pngpath;
     wxString desc;
     double duration;
     int sample_rate;

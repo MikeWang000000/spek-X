@@ -23,6 +23,10 @@ protected:
 private:
     SpekWindow *window;
     wxString path;
+    wxString pngpath;
+#ifdef OS_OSX
+    bool cmdcall = false;
+#endif
     bool quit;
 };
 
@@ -35,7 +39,11 @@ bool Spek::OnInit()
 
     spek_artwork_init();
     spek_platform_init();
-    SpekPreferences::get().init();
+
+    SpekPreferences& prefs = SpekPreferences::get();
+    prefs.init();
+    long width = prefs.get_window_width();
+    long height = prefs.get_window_height();
 
     static const wxCmdLineEntryDesc desc[] = {{
             wxCMD_LINE_SWITCH,
@@ -58,6 +66,27 @@ bool Spek::OnInit()
             "FILE",
             wxCMD_LINE_VAL_STRING,
             wxCMD_LINE_PARAM_OPTIONAL,
+        }, {
+            wxCMD_LINE_PARAM,
+            NULL,
+            NULL,
+            "PNG",
+            wxCMD_LINE_VAL_STRING,
+            wxCMD_LINE_PARAM_OPTIONAL
+        },{
+            wxCMD_LINE_PARAM,
+            NULL,
+            NULL,
+            "WIDTH",
+            wxCMD_LINE_VAL_NUMBER,
+            wxCMD_LINE_PARAM_OPTIONAL
+        },{
+            wxCMD_LINE_PARAM,
+            NULL,
+            NULL,
+            "HEIGHT",
+            wxCMD_LINE_VAL_NUMBER,
+            wxCMD_LINE_PARAM_OPTIONAL
         },
         wxCMD_LINE_DESC_END,
     };
@@ -89,12 +118,46 @@ bool Spek::OnInit()
     }
     if (parser.GetParamCount()) {
         this->path = parser.GetParam();
+#ifdef OS_OSX
+        this->cmdcall = true;
+#endif
+    }
+    if (parser.GetParamCount() > 1) {
+        wxString pngpath = parser.GetParam(1);
+        wxFileName png_path(pngpath);
+        png_path.MakeAbsolute();
+        wxFileName file_path(this->path);
+
+        if (!(png_path.IsDirWritable() || png_path.IsFileWritable())) {
+            msgout->Printf(_("PNG \"%s\" is not writable"), pngpath);
+#ifndef OS_WIN
+            msgout->Printf("\n");
+#endif
+            this->quit = true;
+            return false;
+        }
+        if (png_path.SameAs(file_path)) {
+            msgout->Printf(_("PNG \"%s\" is same as FILE \"%s\""), pngpath, this->path);
+#ifndef OS_WIN
+            msgout->Printf("\n");
+#endif
+            this->quit = true;
+            return false;
+        }
+
+        this->pngpath = pngpath;
+    }
+    if (parser.GetParamCount() > 3) {
+        wxString width_str = parser.GetParam(2);
+        wxString height_str = parser.GetParam(3);
+
+        if (!(width_str.ToLong(&width) && height_str.ToLong(&height))) {
+            width = prefs.get_window_width();
+            height = prefs.get_window_height();
+        }
     }
 
-    // Checking prefs can probably be solved differently.
-    SpekPreferences& prefs = SpekPreferences::get();
-
-    this->window = new SpekWindow(prefs.get_window_width(), prefs.get_window_height(), this->path);
+    this->window = new SpekWindow(width, height, this->path, this->pngpath);
     this->window->Show(true);
     SetTopWindow(this->window);
     return true;
@@ -112,7 +175,7 @@ int Spek::OnRun()
 #ifdef OS_OSX
 void Spek::MacOpenFiles(const wxArrayString& files)
 {
-    if (files.GetCount() == 1) {
+    if (!this->cmdcall && files.GetCount() == 1) {
         this->window->open(files[0]);
     }
 }
