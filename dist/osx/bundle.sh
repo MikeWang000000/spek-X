@@ -6,7 +6,7 @@ cd $(dirname $0)/../..
 
 rm -f src/spek
 
-./autogen.sh && make -j8 || exit 1
+./autogen.sh && make -j2 || exit 1
 
 cd dist/osx
 rm -fr Spek.app
