@@ -1,6 +1,8 @@
 #!/bin/sh
 
 LANGUAGES="bs ca cs da de el eo es fi fr gl he hu id it ja ko lv nb nl pl pt_BR ru sk sr@latin sv th tr uk vi zh_CN zh_TW"
+LOCALEDIR="/usr/local/share/locale/"
+[ ! -d "$LOCALEDIR" ] && [ -d "$HOMEBREW_PREFIX/share/locale/" ] && LOCALEDIR="$HOMEBREW_PREFIX/share/locale/"
 
 cd $(dirname $0)/../..
 
@@ -25,7 +27,7 @@ cp ../../lic/* Spek.app/Contents/Resources/lic/
 for lang in $LANGUAGES; do
     mkdir -p Spek.app/Contents/Resources/"$lang".lproj
     cp -v ../../po/"$lang".gmo Spek.app/Contents/Resources/"$lang".lproj/spek.mo
-    cp -v /usr/local/share/locale/"$lang"/LC_MESSAGES/wxstd.mo Spek.app/Contents/Resources/"$lang".lproj/
+    cp -v "$LOCALEDIR""$lang"/LC_MESSAGES/wxstd*.mo Spek.app/Contents/Resources/"$lang".lproj/wxstd.mo
 done
 mkdir -p Spek.app/Contents/Resources/en.lproj
 
@@ -34,7 +36,7 @@ while [ ! -z "$BINS" ]; do
     NEWBINS=""
     for bin in $BINS; do
         echo "Updating dependendies for $bin."
-        LIBS=$(otool -L $bin | grep /usr/local | tr -d '\t' | awk '{print $1}')
+        LIBS=$(otool -L $bin | grep -e /usr/local/ -e /opt/ | tr -d '\t' | awk '{print $1}')
         for lib in $LIBS; do
             reallib=$(realpath $lib)
             libname=$(basename $reallib)
