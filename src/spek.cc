@@ -34,6 +34,7 @@ IMPLEMENT_APP(Spek)
 
 bool Spek::OnInit()
 {
+    wxLog::SetLogLevel(wxLOG_Error);
     wxInitAllImageHandlers();
     wxSocketBase::Initialize();
 
