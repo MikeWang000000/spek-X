@@ -13,8 +13,7 @@
 void spek_platform_init()
 {
 #ifdef OS_OSX
-    ProcessSerialNumber PSN;
-    GetCurrentProcess(&PSN);
+    ProcessSerialNumber PSN = {0, kCurrentProcess};
     TransformProcessType(&PSN, kProcessTransformToForegroundApplication);
 #endif
 }
