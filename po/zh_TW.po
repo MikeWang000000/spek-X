@@ -29,7 +29,7 @@ msgstr "頻譜分析儀"
 
 #: ../data/spek.desktop.in.in.h:3
 msgid "View spectrograms of your audio files"
-msgstr "顯示你的音頻頻譜"
+msgstr "顯示您的音頻頻譜"
 
 #: ../data/spek.desktop.in.in.h:4
 msgid "Spek Spectrum Analyser"
@@ -49,25 +49,25 @@ msgstr "%d Hz"
 #, c-format
 msgid "%d bit"
 msgid_plural "%d bits"
-msgstr[0] "%d 字節"
+msgstr[0] "%d bits"
 
 #: ../src/spek-pipeline.cc:217
 #, c-format
 msgid "%d channel"
 msgid_plural "%d channels"
-msgstr[0] "%d 聲道"
+msgstr[0] "%d channels"
 
 #: ../src/spek-pipeline.cc:234
 msgid "Cannot open input file"
-msgstr "無法打開文件"
+msgstr "無法開啟該檔案"
 
 #: ../src/spek-pipeline.cc:237
 msgid "Cannot find stream info"
-msgstr "無法定位流媒體信息"
+msgstr "無法定位媒體信息"
 
 #: ../src/spek-pipeline.cc:240
 msgid "The file contains no audio streams"
-msgstr "該文件不包含音頻流"
+msgstr "該檔案不包含音訊流"
 
 #: ../src/spek-pipeline.cc:243
 msgid "Cannot find decoder"
@@ -83,11 +83,11 @@ msgstr "無音頻聲道"
 
 #: ../src/spek-pipeline.cc:252
 msgid "Cannot open decoder"
-msgstr "無法運行解碼器"
+msgstr "無法執行解碼器"
 
 #: ../src/spek-pipeline.cc:255
 msgid "Unsupported sample format"
-msgstr "不支持的音頻文件"
+msgstr "不支援此音訊的格式"
 
 #. TRANSLATORS: first %s is the error message, second %s is stream
 #. description.
@@ -98,16 +98,16 @@ msgstr "%s: %s"
 
 #: ../src/spek-preferences-dialog.cc:67
 msgid "Preferences"
-msgstr "偏好設定"
+msgstr "喜好設定"
 
 #: ../src/spek-preferences-dialog.cc:72
 msgid "(system default)"
-msgstr "(作業系統默認)"
+msgstr "(系統預設)"
 
 #. TRANSLATORS: The name of a section in the Preferences dialog.
 #: ../src/spek-preferences-dialog.cc:79
 msgid "General"
-msgstr "普通設定"
+msgstr "一般設定"
 
 #: ../src/spek-preferences-dialog.cc:88
 msgid "Language:"
@@ -143,7 +143,7 @@ msgstr "Spek - 聲學頻譜分析儀"
 
 #: ../src/spek-window.cc:91
 msgid "&File"
-msgstr "文件"
+msgstr "檔案"
 
 #: ../src/spek-window.cc:97
 msgid "&Edit"
@@ -169,15 +169,15 @@ msgstr "Spek - %s"
 
 #: ../src/spek-window.cc:226
 msgid "All files"
-msgstr "所有文件"
+msgstr "所有檔案"
 
 #: ../src/spek-window.cc:228
 msgid "Audio files"
-msgstr "音頻文件"
+msgstr "音頻檔案"
 
 #: ../src/spek-window.cc:242
 msgid "Open File"
-msgstr "打開文件"
+msgstr "開啟檔案"
 
 #: ../src/spek-window.cc:264
 msgid "PNG images"
