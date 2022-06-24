@@ -93,7 +93,17 @@ void SpekSpectrogram::save(const wxString& path)
 
 void SpekSpectrogram::on_char(wxKeyEvent& evt)
 {
-    switch (evt.GetKeyCode()) {
+    int key_modifier = evt.GetModifiers();
+    int key_code = evt.GetKeyCode();
+
+#ifdef OS_OSX
+    // Using Command-W to close the window in macOS
+    if (key_modifier == wxMOD_CONTROL && key_code == 'W') {
+        this->GetParent()->Close(true);
+        return;
+    }
+#endif
+    switch (key_code) {
     case 'f':
         this->window_function = (enum window_function) ((this->window_function + 1) % WINDOW_COUNT);
         break;
