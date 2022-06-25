@@ -160,7 +160,7 @@ std::unique_ptr<AudioFile> Audio::open(const std::string& file_name, int stream)
         if (bits_per_sample) {
             bit_rate = 0;
         }
-        channels = codecpar->ch_layout.nb_channels;
+        channels = codecpar->channels;
 
         if (avstream->duration != AV_NOPTS_VALUE) {
             duration = avstream->duration * av_q2d(avstream->time_base);
