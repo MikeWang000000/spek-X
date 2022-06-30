@@ -14,3 +14,6 @@ bool spek_platform_can_change_language();
 
 // Fonts are smaller on OSX.
 double spek_platform_font_scale();
+
+// Gets DPI scale factor.
+double spek_platform_dpi_scale();

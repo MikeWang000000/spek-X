@@ -20,22 +20,20 @@ BEGIN_EVENT_TABLE(SpekSpectrogram, wxWindow)
     SPEK_EVT_HAVE_SAMPLE(SpekSpectrogram::on_have_sample)
 END_EVENT_TABLE()
 
-enum
-{
-    MIN_RANGE = -140,
-    MAX_RANGE = 0,
-    URANGE = 0,
-    LRANGE = -120,
-    FFT_BITS = 11,
-    MIN_FFT_BITS = 8,
-    MAX_FFT_BITS = 14,
-    LPAD = 60,
-    TPAD = 60,
-    RPAD = 90,
-    BPAD = 40,
-    GAP = 10,
-    RULER = 10,
-};
+// Constants
+const int SpekSpectrogram::MIN_RANGE = -140;
+const int SpekSpectrogram::MAX_RANGE = 0;
+const int SpekSpectrogram::URANGE = 0;
+const int SpekSpectrogram::LRANGE = -120;
+const int SpekSpectrogram::FFT_BITS = 11;
+const int SpekSpectrogram::MIN_FFT_BITS = 8;
+const int SpekSpectrogram::MAX_FFT_BITS = 14;
+const int SpekSpectrogram::LPAD = 60 * spek_platform_dpi_scale();
+const int SpekSpectrogram::TPAD = 60 * spek_platform_dpi_scale();
+const int SpekSpectrogram::RPAD = 90 * spek_platform_dpi_scale();
+const int SpekSpectrogram::BPAD = 40 * spek_platform_dpi_scale();
+const int SpekSpectrogram::GAP = 10 * spek_platform_dpi_scale();
+const int SpekSpectrogram::RULER = 10 * spek_platform_dpi_scale();
 
 // Forward declarations.
 static wxString trim(wxDC& dc, const wxString& s, int length, bool trim_end);

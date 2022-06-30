@@ -7,6 +7,7 @@
 #include <wx/filename.h>
 #include <wx/stdpaths.h>
 #include <wx/utils.h>
+#include <wx/window.h>
 
 #include "spek-platform.h"
 
@@ -45,6 +46,16 @@ double spek_platform_font_scale()
 {
 #ifdef OS_OSX
     return 1.3;
+#else
+    return 1.0;
+#endif
+}
+
+double spek_platform_dpi_scale()
+{
+#ifdef OS_WIN
+    static double factor = wxWindow().GetDPIScaleFactor();
+    return factor;
 #else
     return 1.0;
 #endif

@@ -32,6 +32,20 @@ private:
 
     void create_palette();
 
+    static const int MIN_RANGE;
+    static const int MAX_RANGE;
+    static const int URANGE;
+    static const int LRANGE;
+    static const int FFT_BITS;
+    static const int MIN_FFT_BITS;
+    static const int MAX_FFT_BITS;
+    static const int LPAD;
+    static const int TPAD;
+    static const int RPAD;
+    static const int BPAD;
+    static const int GAP;
+    static const int RULER;
+
     std::unique_ptr<Audio> audio;
     std::unique_ptr<FFT> fft;
     spek_pipeline *pipeline;

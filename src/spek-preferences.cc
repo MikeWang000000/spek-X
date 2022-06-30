@@ -109,14 +109,14 @@ void SpekPreferences::set_show_detailed_description(bool value)
 
 int SpekPreferences::get_window_width()
 {
-    int result = 640;
+    int result = 640 * spek_platform_dpi_scale();
     this->config->Read("/general/width", &result);
     return result;
 }
 
 int SpekPreferences::get_window_height()
 {
-    int result = 480;
+    int result = 480 * spek_platform_dpi_scale();
     this->config->Read("/general/height", &result);
     return result;
 }
