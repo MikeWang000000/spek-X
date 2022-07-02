@@ -17,6 +17,17 @@ void SpekPreferences::init()
     }
     this->locale = new wxLocale();
 
+#ifdef OS_WIN
+    // Load MO files embedded in Windows executable file.
+    wxTranslations *translation = wxTranslations::Get();
+    if (translation == nullptr) {
+        translation = new wxTranslations();
+        wxTranslations::Set(translation);
+    }
+    wxResourceTranslationsLoader *loader = new wxResourceTranslationsLoader();
+    translation->SetLoader(loader);
+#endif
+
     int lang = wxLANGUAGE_DEFAULT;
     wxString code = this->get_language();
     if (spek_platform_can_change_language() && !code.IsEmpty()) {

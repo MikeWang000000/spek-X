@@ -1,40 +1,45 @@
-#!/bin/sh
+#!/bin/bash
 
-# This script will cross-compile spek.exe, make a ZIP archive and prepare files
-# for building an MSI installer under Windows.
+# This script will compile spek.exe under MSYS2 and make a ZIP archive.
 # Check README.md in this directory for instructions.
 
 # Adjust these variables if necessary.
-MXE=/opt/mxe-spek/usr
 MAKE=make
 JOBS=3
 ZIP=zip
+STRIP=strip
+WINDRES=windres
+CYGPATH=cygpath
+WXCONFIG=wx-config
+WX_PREFIX="$(wx-config --prefix)"
 
-HOST=i686-w64-mingw32.static
 LANGUAGES="bs ca cs da de el eo es fi fr gl he hu id it ja ko lv nb nl pl pt_BR ru sk sr@latin sv th tr uk vi zh_CN zh_TW"
-PATH="$MXE"/bin:$PATH
-STRIP="$HOST"-strip
-WINDRES="$HOST"-windres
-WX_CONFIG="$MXE"/"$HOST"/bin/wx-config
 
 cd $(dirname $0)/../..
 rm -fr dist/win/build && mkdir dist/win/build
 
-# Compile the resource file
-rm -f dist/win/spek.res
-"$WINDRES" dist/win/spek.rc -O coff -o dist/win/spek.res
-mkdir -p src/dist/win && cp dist/win/spek.res src/dist/win/
+# Test windres
+"$WINDRES" dist/win/spek.rc -O coff -o dist/win/spek.res || exit 1
 
-# Compile spek.exe
+# Run autogen.sh
+CXXFLAGS="--static" \
 LDFLAGS="-mwindows dist/win/spek.res" ./autogen.sh \
-    --enable-shared=no \
-    --host="$HOST" \
+    --disable-shared \
+    --enable-static \
     --disable-valgrind \
     --with-wx-config="$WX_CONFIG" \
     --prefix=${PWD}/dist/win/build && \
-    "$MAKE" clean && \
-    "$MAKE" -j $JOBS && \
-    "$MAKE" install || exit 1
+    "$MAKE" clean || exit 1
+
+# Compile PO files first
+cd po && "$MAKE" && cd .. || exit 1
+
+# Compile the resource file
+./dist/win/compile-rc.py "$WINDRES" "$(CYGPATH "$WX_PREFIX")" $LANGUAGES || exit 1
+mkdir -p src/dist/win && cp dist/win/spek.res src/dist/win/
+
+# Compile spek.exe
+"$MAKE" V=1 -j $JOBS && "$MAKE" install || exit 1
 "$STRIP" dist/win/build/bin/spek.exe
 
 # Copy files to the bundle
@@ -45,18 +50,15 @@ cp ../../LICENCE.md Spek/
 cp ../../README.md Spek/
 mkdir Spek/lic
 cp ../../lic/* Spek/lic/
-for lang in $LANGUAGES; do
-    mkdir -p Spek/"$lang"
-    cp build/share/locale/"$lang"/LC_MESSAGES/spek.mo Spek/"$lang"/
-    cp "$MXE"/"$HOST"/share/locale/"$lang"/LC_MESSAGES/wxstd.mo Spek/"$lang"/
-done
 rm -fr build
-
-# Create a zip archive
-rm -f spek.zip
-"$ZIP" -r spek.zip Spek
-
 cd ../..
 
+# Create a zip archive
+cd dist/win/Spek
+rm -f Spek.zip
+"$ZIP" -mr Spek.zip *
+cd ../../..
+
 # Clean up
+rm -fr src/dist
 rm dist/win/spek.res

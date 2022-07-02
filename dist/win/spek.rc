@@ -1,8 +1,7 @@
-#define wxUSE_DPI_AWARE_MANIFEST 2
-#include <wx/msw/wx.rc>
-
 aaaa ICON "spek.ico"
 help ICON "help.ico"
 open ICON "open.ico"
 save ICON "save.ico"
 close ICON "close.ico"
+
+1 24 "spek.manifest"

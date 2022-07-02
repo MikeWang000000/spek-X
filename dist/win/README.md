@@ -1,25 +1,14 @@
-## Building the Windows installer
+## Build Spek for Windows
 
-This is done in two steps:
+[[简体中文 Simplified Chinese]](./README-zh_CN.md)
 
- * Cross-compiling spek.exe using [MXE](http://mxe.cc/).
- * Building the MSI package under Windows.
+You can now build the Spek executable directly under MSYS2 on Windows without cross-compiling.
 
-For the first step you can use any Unix-y environment. Set up
-[MXE](http://mxe.cc/#tutorial).
+Build steps:
+* Install [MSYS2](https://www.msys2.org).
+* Run `mingw64.exe`. If you are using Windows on ARM, please run `clangarm64.exe`.
+* Enter the project directory.
+* Install the dependencies: `./dist/win/install_deps.sh`. This procedure will take some time.
+* Compile and bundle Spek: `./dist/win/bundle.sh`.
 
-Clone mxe from my fork created specifically for building Spek into `/opt/mxe-spek`:
-
-    git clone -b mxe-spek https://github.com/withmorten/mxe/ mxe-spek
-
-Build Spek dependencies:
-
-    make pthreads ffmpeg wxwidgets -j1 JOBS=4
-
-Build Spek, adjusting `bundle.sh` variables as necessary:
-
-    ./dist/win/bundle.sh
-
-For the second step, you will need a Windows box with
-[WiX](http://wixtoolset.org/) installed. Copy over the entire `dist/win`
-directory, cd into it, and run `bundle.bat`.
+You can modify `install_deps.sh` and `bundle.sh` as needed.
