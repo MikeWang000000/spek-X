@@ -30,7 +30,7 @@ Spek requires OS X 10.5+ and an Intel-based Mac.
 
 ### Building from the git repository
 
-    git clone git://github.com/withmorten/spek-alternative.git
+    git clone https://github.com/MikeWang000000/spek-X.git
     cd spek
     ./autogen.sh
     make
