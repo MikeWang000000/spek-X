@@ -33,7 +33,7 @@ Original Spek (Outdated)
 ### Building from the git repository
 
     git clone https://github.com/MikeWang000000/spek-X.git
-    cd spek
+    cd spek-X
     ./autogen.sh
     make
 
