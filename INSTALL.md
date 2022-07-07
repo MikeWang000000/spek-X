@@ -2,24 +2,26 @@
 
 ## Windows
 
-Download section offers two packages: an MSI installer and a ZIP archive. To
-install Spek, download the MSI installer, double-click it and follow the
-instructions.
+Download section offers two packages: a ZIP archive for x64 processors and a
+ZIP archive for Arm64 processors. 32-bit Windows is not supported.
 
-If you don't want to use the installer, you can download the ZIP archive, unpack
-it somewhere on your disk and run `Spek\spek.exe`.
+Download the ZIP archive, unpack it somewhere on your disk and run `spek.exe`.
 
-## Mac OS X
+## macOS
 
-Spek for Mac OS X is available in the download section. Download and open the
-DMG package, then drag the Spek icon to Applications.
+Download section offers two packages: a ZIP archive for Intel processors and a
+ZIP archive for Apple Silicon. Spek requires macOS 10.5+.
 
-Spek requires OS X 10.5+ and an Intel-based Mac.
+Download and unpack the ZIP archive, then drag the Spek icon to Applications.
 
-## *BSD and GNU/Linux
+## Linux and other Unix-like systems
 
 ### Binary packages
 
+Spek-X
+ * Debian (deb-multimedia): [spek-x](https://deb-multimedia.org/pool/main/s/spek-x-dmo/), Tsinghua mirror: [spek-x](https://mirrors.tuna.tsinghua.edu.cn/debian-multimedia/pool/main/s/spek-x-dmo/)
+
+Original Spek (Outdated)
  * Arch: [spek](https://aur.archlinux.org/packages/spek/) and
    [spek-git](https://aur.archlinux.org/packages/spek-git/)
  * Debian: [spek](https://packages.debian.org/search?keywords=spek)
@@ -36,7 +38,7 @@ Spek requires OS X 10.5+ and an Intel-based Mac.
     make
 
 To build you will need wxWidgets and FFmpeg packages. On Debian/Ubuntu you also
-need development packages: `libwxgtk2.8-dev`, `wx-common`, `libavcodec-dev` and
+need development packages: `libwxgtk3.0-dev`, `wx-common`, `libavcodec-dev` and
 `libavformat-dev`.
 
 To start Spek, run:

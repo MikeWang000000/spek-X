@@ -1,22 +1,20 @@
-Source: spek
+Source: spek-x
 Section: sound
 Priority: optional
-Maintainer: Alexander Kojevnikov <alexander@kojevnikov.com>
+Maintainer: MikeWang000000 <mikewang000000@gmail.com>
 Build-Depends: debhelper (>= 9),
                autotools-dev,
                pkg-config,
                intltool (>= 0.35),
-               libavcodec-dev (>= 6:0.8),
-               libavformat-dev (>= 6:0.8),
-               libavutil-dev (>= 6:0.8),
+               libavcodec-dev (>= 10:5.0~),
+               libavformat-dev (>= 10:5.0~),
+               libavutil-dev (>= 10:5.0~),
                libwxgtk3.0-dev,
                wx-common
 Standards-Version: 3.9.6
-Homepage: http://spek.cc/
-Vcs-Git: git://github.com/alexkay/spek.git
-Vcs-Browser: https://github.com/alexkay/spek
+Homepage: https://github.com/MikeWang000000/spek-X
 
-Package: spek
+Package: spek-x
 Architecture: any
 Depends: ${shlibs:Depends},
          ${misc:Depends}

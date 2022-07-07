@@ -4,10 +4,23 @@
 Spek \- Acoustic Spectrum Analyser
 .SH SYNOPSIS
 .PP
-\f[C]spek\f[] [\f[I]OPTION\f[] \f[I]\&...\f[]] [\f[I]FILE\f[]]
+\f[C]spek\f[] [\f[I]OPTION\f[] \f[I]\&...\f[]] [\f[I]FILE\f[]] [\f[I]PNG\f[]] [\f[I]WIDTH\f[]] [\f[I]HEIGHT\f[]]
 .SH DESCRIPTION
 .PP
 \f[I]Spek\f[] generates a spectrogram for the input audio file.
+.SH ARGUMENTS
+.TP
+\f[I]FILE\f[]
+Audio file to be analyzed.
+.TP
+\f[I]PNG\f[]
+Write spectrogram to this PNG file then exit.
+.TP
+\f[I]WIDTH\f[]
+Initial width of the spectrum in pixels.
+.TP
+\f[I]HEIGHT\f[]
+Initial height of the spectrum in pixels.
 .SH OPTIONS
 .TP
 .B \f[C]\-h\f[], \f[C]\-\-help\f[]
@@ -51,13 +64,33 @@ Show the about dialog.
 .RE
 .SS Spectrogram
 .TP
-.B \f[C]Ctrl\-up\f[], \f[C]Ctrl\-down\f[]
+.B \f[C]f\f[], \f[C]F\f[]
+Change the DFT window function.
+.RS
+.RE
+.TP
+.B \f[C]l\f[], \f[C]L\f[]
 Change the lower limit of the dynamic range in dBFS.
 .RS
 .RE
 .TP
-.B \f[C]Ctrl\-Shift\-up\f[], \f[C]Ctrl\-Shift\-down\f[]
+.B \f[C]p\f[], \f[C]P\f[]
+Change the palette.
+.RS
+.RE
+.TP
+.B \f[C]s\f[], \f[C]S\f[]
+Change the audio stream.
+.RS
+.RE
+.TP
+.B \f[C]u\f[], \f[C]U\f[]
 Change the upper limit of the dynamic range in dBFS.
+.RS
+.RE
+.TP
+.B \f[C]w\f[], \f[C]W\f[]
+Change the DFT window size.
 .RS
 .RE
 .SH FILES

@@ -1,20 +1,32 @@
-% SPEK(1) User's Guide | Version 0.8.2.3
-%
-% 2017-12-08
+# SPEK(1) User's Guide | Version 0.9.0
 
-# NAME
+## NAME
 
 Spek - Acoustic Spectrum Analyser
 
-# SYNOPSIS
+## SYNOPSIS
 
-`spek` [*OPTION* *...*] \[*FILE*]
+`spek` [*OPTION* *...*] \[*FILE*] \[*PNG*] \[*WIDTH*] \[*HEIGHT*]
 
-# DESCRIPTION
+## DESCRIPTION
 
 *Spek* generates a spectrogram for the input audio file.
 
-# OPTIONS
+## ARGUMENTS
+
+`FILE`
+:   Audio file to be analyzed.
+
+`PNG`
+:   Write spectrogram to this PNG file then exit.
+
+`WIDTH`
+:   Initial width of the spectrum in pixels.
+
+`HEIGHT`
+:   Initial height of the spectrum in pixels.
+
+## OPTIONS
 
 `-h`, `--help`
 :   Output the help message then quit.
@@ -22,13 +34,13 @@ Spek - Acoustic Spectrum Analyser
 `-V`, `--version`
 :   Output version information then quit.
 
-# KEYBINDINGS
+## KEYBINDINGS
 
-## Notes
+### Notes
 
 On OS X use the Command key instead of Ctrl.
 
-## Menu
+### Menu
 
 `Ctrl-O`
 :   Open a new file.
@@ -45,7 +57,7 @@ On OS X use the Command key instead of Ctrl.
 `Shift-F1`
 :   Show the about dialog.
 
-## Spectrogram
+### Spectrogram
 
 `f`, `F`
 :   Change the DFT window function.
@@ -65,16 +77,16 @@ On OS X use the Command key instead of Ctrl.
 `w`, `W`
 :   Change the DFT window size.
 
-# FILES
+## FILES
 
 *~/.config/spek/preferences*
 :   The configuration file for *Spek*, stored in a simple INI format.
 
-# AUTHORS
+## AUTHORS
 
 Alexander Kojevnikov <alexander@kojevnikov.com>. Other contributors are listed
 in the LICENCE.md file distributed with the source code.
 
-# DISTRIBUTION
+## DISTRIBUTION
 
 The latest version of this *Spek* fork may be downloaded from <https://github.com/withmorten/spek/releases>.

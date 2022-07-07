@@ -42,7 +42,7 @@ Debian packages:
  * <https://deb-multimedia.org/pool/main/s/spek-x-dmo/>
 
 ### Build Instructions
-[Windows](./dist/win/README.md) | [macOS](./dist/osx/README.md) | [Linux and other unix-like systems](./INSTALL.md)
+[Windows](./dist/win/README.md) | [macOS](./dist/osx/README.md) | [Linux and other Unix-like systems](./INSTALL.md)
 
 ### Dependencies
 
