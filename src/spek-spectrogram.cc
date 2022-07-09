@@ -30,7 +30,7 @@ const int SpekSpectrogram::MIN_FFT_BITS = 8;
 const int SpekSpectrogram::MAX_FFT_BITS = 14;
 const int SpekSpectrogram::LPAD = 60 * spek_platform_dpi_scale();
 const int SpekSpectrogram::TPAD = 60 * spek_platform_dpi_scale();
-const int SpekSpectrogram::RPAD = 90 * spek_platform_dpi_scale();
+const int SpekSpectrogram::RPAD = 92 * spek_platform_dpi_scale();
 const int SpekSpectrogram::BPAD = 40 * spek_platform_dpi_scale();
 const int SpekSpectrogram::GAP = 10 * spek_platform_dpi_scale();
 const int SpekSpectrogram::RULER = 10 * spek_platform_dpi_scale();
@@ -251,6 +251,8 @@ void SpekSpectrogram::render(wxDC& dc)
         wxFONTSTYLE_NORMAL,
         wxFONTWEIGHT_NORMAL
     );
+    wxFont normal_bold_font = wxFont(normal_font);
+    normal_bold_font.SetWeight(wxFONTWEIGHT_BOLD);
     wxFont large_font = wxFont(normal_font);
     large_font.SetPointSize((int)round(10 * spek_platform_font_scale()));
     large_font.SetWeight(wxFONTWEIGHT_BOLD);
@@ -267,12 +269,12 @@ void SpekSpectrogram::render(wxDC& dc)
     dc.Clear();
 
     // Spek version
-    dc.SetFont(large_font);
+    dc.SetFont(normal_bold_font);
     wxString package_name(PACKAGE_NAME);
     dc.DrawText(
         package_name,
         w - RPAD + GAP,
-        TPAD - 2 * GAP - normal_height - large_height
+        TPAD - 2 * GAP - normal_height - normal_height
     );
     int package_name_width = dc.GetTextExtent(package_name + " ").GetWidth();
     dc.SetFont(small_font);
