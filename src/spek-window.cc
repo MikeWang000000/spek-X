@@ -311,7 +311,7 @@ void SpekWindow::on_about(wxCommandEvent&)
     if (translator != "translator-credits") {
         info.AddTranslator(translator);
     }
-    info.SetName("Spek");
+    info.SetName("Spek-X");
     info.SetVersion(PACKAGE_VERSION);
     info.SetCopyright(_("Copyright (c) 2010-2013 Alexander Kojevnikov and contributors"));
     info.SetDescription(this->description);
