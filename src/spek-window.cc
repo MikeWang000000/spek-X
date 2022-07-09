@@ -317,7 +317,7 @@ void SpekWindow::on_about(wxCommandEvent&)
     info.SetDescription(this->description);
 #ifdef OS_UNIX
     info.SetWebSite(
-        wxString::Format("https://github.com/MikeWang000000/spek-X/blob/release/%s/MANUAL.md", PACKAGE_VERSION),
+        wxString::Format("https://github.com/MikeWang000000/spek-X/blob/release/v%s/MANUAL.md", PACKAGE_VERSION),
         _("Spek Website")
     );
     info.SetIcon(wxArtProvider::GetIcon("spek", wxART_OTHER, wxSize(128, 128)));
