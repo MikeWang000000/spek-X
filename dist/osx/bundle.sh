@@ -59,9 +59,9 @@ done
 # Sign the app
 codesign -fs - ./Spek.app ./Spek.app/Contents/Frameworks/*
 
-# Create a zip archive
-rm -f Spek.zip
-zip -mr Spek.zip ./Spek.app
+# Create a gzip tar archive
+rm -f Spek.tgz
+tar cvzf Spek.tgz ./Spek.app
 
 # Clean up
 cd ../..

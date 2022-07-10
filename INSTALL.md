@@ -9,10 +9,10 @@ Download the ZIP archive, unpack it somewhere on your disk and run `spek.exe`.
 
 ## macOS
 
-Download section offers two packages: a ZIP archive for Intel processors and a
-ZIP archive for Apple Silicon. Spek requires macOS 10.5+.
+Download section offers two packages: a TGZ archive for Intel processors and a
+TGZ archive for Apple Silicon. Spek requires macOS 10.5+.
 
-Download and unpack the ZIP archive, then drag the Spek icon to Applications.
+Download and unpack the TGZ archive, then drag the Spek icon to Applications.
 
 ## Linux and other Unix-like systems
 
