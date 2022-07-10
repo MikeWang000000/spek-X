@@ -1,5 +1,7 @@
 # Installation instructions
 
+[[简体中文 Simplified Chinese]](./INSTALL-zh_CN.md)
+
 ## Windows
 
 Download section offers two packages: a ZIP archive for x64 processors and a
