@@ -13,7 +13,7 @@ brew --version >/dev/null 2>&1 || {
     exit 1
 }
 
-brew install autoconf automake gettext intltool libtool pkg-config wxwidgets nasm || exit 1
+brew install autoconf automake gettext intltool libtool pkg-config wxwidgets nasm wget || exit 1
 
 rm -rf $(dirname $0)/deps
 mkdir -p $(dirname $0)/deps
