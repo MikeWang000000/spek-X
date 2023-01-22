@@ -49,6 +49,8 @@ SpekSpectrogram::SpekSpectrogram(wxFrame *parent) :
     pipeline(NULL),
     streams(0),
     stream(0),
+    channels(0),
+    channel(0),
     window_function(WINDOW_DEFAULT),
     duration(0.0),
     sample_rate(0),
@@ -76,6 +78,7 @@ void SpekSpectrogram::open(const wxString& path, const wxString& pngpath)
     this->path = path;
     this->pngpath = pngpath;
     this->stream = 0;
+    this->channel = 0;
     start();
     Refresh();
 }
@@ -417,6 +420,7 @@ void SpekSpectrogram::start()
             this->audio->open(std::string(this->path.utf8_str()), this->stream),
             this->fft->create(this->fft_bits),
             this->stream,
+            this->channel,
             this->window_function,
             samples,
             pipeline_cb,
@@ -426,6 +430,7 @@ void SpekSpectrogram::start()
         // TODO: extract conversion into a utility function.
         this->desc = wxString::FromUTF8(spek_pipeline_desc(this->pipeline).c_str());
         this->streams = spek_pipeline_streams(this->pipeline);
+        this->channels = spek_pipeline_channels(this->pipeline);
         this->duration = spek_pipeline_duration(this->pipeline);
         this->sample_rate = spek_pipeline_sample_rate(this->pipeline);
     } else {

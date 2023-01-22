@@ -1,3 +1,5 @@
+#include <assert.h>
+
 extern "C" {
 #define __STDC_CONSTANT_MACROS
 #define __STDC_LIMIT_MACROS
@@ -17,7 +19,7 @@ public:
         int bits_per_sample, int streams, int channels, double duration
     );
     ~AudioFileImpl() override;
-    void start(int samples) override;
+    void start(int channel, int samples) override;
     int read() override;
 
     AudioError get_error() const override { return this->error; }
@@ -46,8 +48,9 @@ private:
     int channels;
     double duration;
 
+    int channel;
+
     AVPacket *packet;
-    int offset;
     AVFrame *frame;
     int buffer_len;
     float *buffer;
@@ -69,7 +72,7 @@ std::unique_ptr<AudioFile> Audio::open(const std::string& file_name, int stream)
     AudioError error = AudioError::OK;
 
     AVFormatContext *format_context = nullptr;
-    if (avformat_open_input(&format_context, file_name.c_str(), nullptr, nullptr) != 0) {
+    if (avformat_open_input(&format_context, file_name.c_str(), nullptr, nullptr) < 0) {
         error = AudioError::CANNOT_OPEN_FILE;
     }
 
@@ -221,7 +224,6 @@ AudioFileImpl::AudioFileImpl(
     this->packet = av_packet_alloc();
     this->packet->data = nullptr;
     this->packet->size = 0;
-    this->offset = 0;
     this->frame = av_frame_alloc();
     this->buffer_len = 0;
     this->buffer = nullptr;
@@ -238,19 +240,22 @@ AudioFileImpl::~AudioFileImpl()
     if (this->frame) {
         av_frame_free(&this->frame);
     }
-    if (this->packet->data) {
-        this->packet->data -= this->offset;
-        this->packet->size += this->offset;
-        this->offset = 0;
-        av_packet_unref(this->packet);
+    if (this->packet) {
+        av_packet_free(&this->packet);
     }
     if (this->format_context) {
         avformat_close_input(&this->format_context);
     }
 }
 
-void AudioFileImpl::start(int samples)
+void AudioFileImpl::start(int channel, int samples)
 {
+    this->channel = channel;
+    if (channel < 0 || channel >= this->channels) {
+        assert(false);
+        this->error = AudioError::NO_CHANNELS;
+    }
+
     AVStream *stream = this->format_context->streams[this->audio_stream];
     int64_t rate = this->sample_rate * (int64_t)stream->time_base.num;
     int64_t duration = (int64_t)(this->duration * stream->time_base.den / stream->time_base.num);
@@ -262,98 +267,104 @@ void AudioFileImpl::start(int samples)
 int AudioFileImpl::read()
 {
     if (!!this->error) {
+        // Stop on error.
         return -1;
     }
 
+    // This runs a state machine to allow incremental calls to decode and return the next chunk of samples.
+    // FFmpeg docs: https://ffmpeg.org/doxygen/5.1/group__lavc__encdec.html
     for (;;) {
-        while (this->packet->size > 0) {
-            av_frame_unref(this->frame);
-            int ret;
-            ret = avcodec_send_packet(this->codec_context, this->packet);
-            if (ret < 0) {
-                // Error sending a packet for decoding, skip the frame.
-                break;
-            }
-            ret = avcodec_receive_frame(this->codec_context, this->frame);
-            if (ret < 0 && ret != AVERROR(EAGAIN) && ret != AVERROR_EOF) {
-                // Error during decoding, skip the frame.
-                break;
-            }
-            int len = this->packet->size;
-            this->packet->data += len;
-            this->packet->size -= len;
-            this->offset += len;
-            // We have data, return it and come back for more later.
-            int samples = this->frame->nb_samples;
-            int channels = this->channels;
-            int buffer_len = samples * channels;
-            if (buffer_len > this->buffer_len) {
-                this->buffer = static_cast<float*>(
-                    av_realloc(this->buffer, buffer_len * sizeof(float))
-                );
-                this->buffer_len = buffer_len;
-            }
-
-            AVSampleFormat format = static_cast<AVSampleFormat>(this->frame->format);
-            int is_planar = av_sample_fmt_is_planar(format);
-            int i = 0;
-            for (int sample = 0; sample < samples; ++sample) {
-                for (int channel = 0; channel < channels; ++channel) {
-                    uint8_t *data;
-                    int offset;
-                    if (is_planar) {
-                        data = this->frame->data[channel];
-                        offset = sample;
-                    } else {
-                        data = this->frame->data[0];
-                        offset = i;
-                    }
-                    float value;
-                    switch (format) {
-                    case AV_SAMPLE_FMT_S16:
-                    case AV_SAMPLE_FMT_S16P:
-                        value = reinterpret_cast<int16_t*>(data)[offset]
-                            / static_cast<float>(INT16_MAX);
-                        break;
-                    case AV_SAMPLE_FMT_S32:
-                    case AV_SAMPLE_FMT_S32P:
-                        value = reinterpret_cast<int32_t*>(data)[offset]
-                            / static_cast<float>(INT32_MAX);
-                        break;
-                    case AV_SAMPLE_FMT_FLT:
-                    case AV_SAMPLE_FMT_FLTP:
-                        value = reinterpret_cast<float*>(data)[offset];
-                        break;
-                    case AV_SAMPLE_FMT_DBL:
-                    case AV_SAMPLE_FMT_DBLP:
-                        value = reinterpret_cast<double*>(data)[offset];
-                        break;
-                    default:
-                        value = 0.0f;
-                        break;
-                    }
-                    this->buffer[i++] = value;
-                }
-            }
-            return buffer_len;
-        }
-        if (this->packet->data) {
-            this->packet->data -= this->offset;
-            this->packet->size += this->offset;
-            this->offset = 0;
-            av_packet_unref(this->packet);
+        if (!this->packet) {
+            // Finished decoding.
+            return 0;
         }
 
-        int res = 0;
-        while ((res = av_read_frame(this->format_context, this->packet)) >= 0) {
+        // Read the next packet.
+        int ret = 0;
+        while ((ret = av_read_frame(this->format_context, this->packet)) >= 0) {
             if (this->packet->stream_index == this->audio_stream) {
                 break;
             }
             av_packet_unref(this->packet);
         }
-        if (res < 0) {
-            // End of file or error.
-            return 0;
+
+        if (ret < 0) {
+            // End of file or error, empty the packet to flush the decoder.
+            av_packet_unref(this->packet);
+            av_packet_free(&this->packet);
+            this->packet = nullptr;
         }
+
+        ret = avcodec_send_packet(this->codec_context, this->packet);
+        if (this->packet) {
+            av_packet_unref(this->packet);
+        }
+        if (ret < 0) {
+            // Skip the packet.
+            continue;
+        }
+
+        // The packet can contain multiple frames, read all of them.
+        int total_samples = 0;
+        while ((ret = avcodec_receive_frame(this->codec_context, this->frame)) >= 0) {
+            int samples = this->frame->nb_samples;
+            if (samples == 0) {
+                // Occasionally the frame has no samples, move on to the next one.
+                av_frame_unref(this->frame);
+                continue;
+            }
+            // We have the data, normalise and write to the buffer.
+            if ((total_samples + samples) > this->buffer_len) {
+                this->buffer = static_cast<float*>(
+                    av_realloc(this->buffer, (total_samples + samples) * sizeof(float))
+                );
+                this->buffer_len = total_samples + samples;
+            }
+
+            AVSampleFormat format = static_cast<AVSampleFormat>(this->frame->format);
+            int is_planar = av_sample_fmt_is_planar(format);
+            for (int sample = 0; sample < samples; ++sample) {
+                uint8_t *data;
+                int offset;
+                if (is_planar) {
+                    data = this->frame->data[this->channel];
+                    offset = sample;
+                } else {
+                    data = this->frame->data[0];
+                    offset = sample * this->channels;
+                }
+                float value;
+                switch (format) {
+                case AV_SAMPLE_FMT_S16:
+                case AV_SAMPLE_FMT_S16P:
+                    value = reinterpret_cast<int16_t*>(data)[offset]
+                        / static_cast<float>(INT16_MAX);
+                    break;
+                case AV_SAMPLE_FMT_S32:
+                case AV_SAMPLE_FMT_S32P:
+                    value = reinterpret_cast<int32_t*>(data)[offset]
+                        / static_cast<float>(INT32_MAX);
+                    break;
+                case AV_SAMPLE_FMT_FLT:
+                case AV_SAMPLE_FMT_FLTP:
+                    value = reinterpret_cast<float*>(data)[offset];
+                    break;
+                case AV_SAMPLE_FMT_DBL:
+                case AV_SAMPLE_FMT_DBLP:
+                    value = reinterpret_cast<double*>(data)[offset];
+                    break;
+                default:
+                    value = 0.0f;
+                    break;
+                }
+                this->buffer[total_samples + sample] = value;
+            }
+            total_samples += samples;
+            av_frame_unref(this->frame);
+        }
+        if (total_samples > 0) {
+            return total_samples;
+        }
+        // Error during decoding or EOF, skip the packet.
     }
 }
