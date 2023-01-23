@@ -4,7 +4,7 @@
 # Check README.md in this directory for instructions.
 
 # Adjust these variables if necessary.
-FFMPEG_VER="5.0.1"
+FFMPEG_VER="5.1.2"
 PREFIX="/usr/local"
 
 # Check Homebrew
