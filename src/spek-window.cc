@@ -147,8 +147,8 @@ SpekWindow::SpekWindow(int width, int height, const wxString& path, const wxStri
 
     SetSizer(sizer);
 
-    pthread_t thread;
-    pthread_create(&thread, NULL, &check_version, this);
+    // pthread_t thread;
+    // pthread_create(&thread, NULL, &check_version, this);
 }
 
 void SpekWindow::open(const wxString& path)
