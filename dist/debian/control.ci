@@ -1,0 +1,9 @@
+Package: spek-x
+Version: 0.0-testing
+Section: sound
+Priority: optional
+Maintainer: MikeWang000000 <mikewang000000@gmail.com>
+Homepage: https://github.com/MikeWang000000/spek-X
+Architecture: amd64
+Depends: libavcodec59, libavformat59, libavutil57, libc6, libgcc-s1, libstdc++6, libwxbase3.2-0, libwxgtk3.2-0
+Description: Spek-X helps to analyse your audio files by showing their spectrogram.
