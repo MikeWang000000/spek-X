@@ -1,5 +1,7 @@
 # Spek-X
 
+[![CI](https://github.com/MikeWang000000/spek-X/actions/workflows/ci.yml/badge.svg?branch=main&event=push)](https://github.com/MikeWang000000/spek-X/actions/workflows/ci.yml)
+
 [[简体中文 Simplified Chinese]](./README-zh_CN.md)
 
 Spek-X (IPA: /spɛks/) is a fork of [Spek-alternative](https://github.com/withmorten/spek-alternative), which is originally derived from [Spek](https://github.com/alexkay/spek).
@@ -13,22 +15,26 @@ Find out more about Spek on its website: <http://spek.cc/>
 
 <img src="./data/spek-screenshot.png" height="500">
 
-## Spek-X 0.9.0 - 2020/7/10
+## Spek-X 0.9.1 - 2023/1/26
 
 ### Sources / Packages
 
 Category                             | Download link
 -------------------------------------|----------------
-Source tarball                       | [v0.9.0.tar.gz](https://github.com/MikeWang000000/spek-X/archive/v0.9.0.tar.gz)
-Windows (x64)                        | [spek-x-0.9.0-windows-x86_64.zip](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.0/spek-x-0.9.0-windows-x86_64.zip)
-Windows (Arm64)                      | [spek-x-0.9.0-windows-aarch64.zip](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.0/spek-x-0.9.0-windows-aarch64.zip)
-macOS (Intel)                        | [spek-x-0.9.0-macos-x86_64.tgz](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.0/spek-x-0.9.0-macos-x86_64.tgz)
-macOS (Apple Silicon)                | [spek-x-0.9.0-macos-aarch64.tgz](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.0/spek-x-0.9.0-macos-aarch64.tgz)
+Source tarball                       | [v0.9.1.tar.gz](https://github.com/MikeWang000000/spek-X/archive/v0.9.1.tar.gz)
+Windows (x64)                        | [spek-x-0.9.1-windows-x86_64.zip](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.1/spek-x-0.9.1-windows-x86_64.zip)
+Windows (Arm64)                      | [spek-x-0.9.1-windows-aarch64.zip](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.1/spek-x-0.9.1-windows-aarch64.zip)
+macOS (Intel)                        | [spek-x-0.9.1-macos-x86_64.tgz](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.1/spek-x-0.9.1-macos-x86_64.tgz)
+macOS (Apple Silicon)                | [spek-x-0.9.1-macos-aarch64.tgz](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.1/spek-x-0.9.1-macos-aarch64.tgz)
 Debian packages (deb-multimedia.org) | [spek-x-dmo/](https://deb-multimedia.org/pool/main/s/spek-x-dmo/)
 
 ### New Features And Enhancements
 
-Updates since 0.8.2:
+Spek-X 0.9.1 Updates:
+ * Fix m4a and ogg decoding problems.
+ * Fix crashes.
+
+Spek-X 0.9.0 Updates, since 0.8.2:
  * Apple Silicon binary is available now.
  * Windows Arm64 binary is available now.
  * FFmpeg is updated to 5.0+

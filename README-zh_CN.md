@@ -12,17 +12,17 @@ Spek 可用于 *BSD、GNU/Linux、Windows 和 macOS.
 
 <img src="./data/spek-screenshot.png" height="500">
 
-## Spek-X 0.9.0 - 2020/7/10
+## Spek-X 0.9.1 - 2023/1/26
 
 ### Sources / Packages
 
 Category                             | Download link
 -------------------------------------|----------------
-源代码包                             | [v0.9.0.tar.gz](https://github.com/MikeWang000000/spek-X/archive/v0.9.0.tar.gz)
-Windows (x64)                        | [spek-x-0.9.0-windows-x86_64.zip](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.0/spek-x-0.9.0-windows-x86_64.zip)
-Windows (Arm64)                      | [spek-x-0.9.0-windows-aarch64.zip](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.0/spek-x-0.9.0-windows-aarch64.zip)
-macOS (Intel)                        | [spek-x-0.9.0-macos-x86_64.tgz](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.0/spek-x-0.9.0-macos-x86_64.tgz)
-macOS (Apple Silicon)                | [spek-x-0.9.0-macos-aarch64.tgz](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.0/spek-x-0.9.0-macos-aarch64.tgz)
+源代码包                             | [v0.9.1.tar.gz](https://github.com/MikeWang000000/spek-X/archive/v0.9.1.tar.gz)
+Windows (x64)                        | [spek-x-0.9.1-windows-x86_64.zip](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.1/spek-x-0.9.1-windows-x86_64.zip)
+Windows (Arm64)                      | [spek-x-0.9.1-windows-aarch64.zip](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.1/spek-x-0.9.1-windows-aarch64.zip)
+macOS (Intel)                        | [spek-x-0.9.1-macos-x86_64.tgz](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.1/spek-x-0.9.1-macos-x86_64.tgz)
+macOS (Apple Silicon)                | [spek-x-0.9.1-macos-aarch64.tgz](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.1/spek-x-0.9.1-macos-aarch64.tgz)
 Debian 软件包 (deb-multimedia.org)   | [spek-x-dmo/](https://deb-multimedia.org/pool/main/s/spek-x-dmo/)
 
 ### 新增功能和改进

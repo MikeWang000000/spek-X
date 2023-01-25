@@ -1,4 +1,4 @@
-# SPEK(1) User's Guide | Version 0.9.0
+# SPEK(1) User's Guide | Version 0.9.1
 
 ## NAME
 
