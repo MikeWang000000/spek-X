@@ -92,28 +92,19 @@ bool Spek::OnInit()
         wxCMD_LINE_DESC_END,
     };
 
-    wxMessageOutput *msgout = wxMessageOutput::Get();
     wxCmdLineParser parser(desc, argc, argv);
     int ret = parser.Parse(true);
     if (ret == 1) {
-#ifndef OS_WIN
-        msgout->Printf("\n");
-#endif
         return false;
     }
     if (ret == -1) {
-#ifndef OS_WIN
-        msgout->Printf("\n");
-#endif
         this->quit = true;
         return true;
     }
     if (parser.Found("version")) {
         // TRANSLATORS: the %s is the package version.
-        msgout->Printf(_("Spek version %s"), PACKAGE_VERSION);
-#ifndef OS_WIN
-        msgout->Printf("\n");
-#endif
+        wxPrintf(_("Spek version %s"), PACKAGE_VERSION);
+        wxPrintf("\n");
         this->quit = true;
         return true;
     }
@@ -130,17 +121,17 @@ bool Spek::OnInit()
         wxFileName file_path(this->path);
 
         if (!(png_path.IsDirWritable() || png_path.IsFileWritable())) {
-            msgout->Printf(_("PNG \"%s\" is not writable"), pngpath);
+            wxPrintf(_("PNG \"%s\" is not writable"), pngpath);
 #ifndef OS_WIN
-            msgout->Printf("\n");
+            wxPrintf("\n");
 #endif
             this->quit = true;
             return false;
         }
         if (png_path.SameAs(file_path)) {
-            msgout->Printf(_("PNG \"%s\" is same as FILE \"%s\""), pngpath, this->path);
+            wxPrintf(_("PNG \"%s\" is same as FILE \"%s\""), pngpath, this->path);
 #ifndef OS_WIN
-            msgout->Printf("\n");
+            wxPrintf("\n");
 #endif
             this->quit = true;
             return false;
