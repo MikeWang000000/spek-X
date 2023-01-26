@@ -55,7 +55,7 @@ SpekPreferences::SpekPreferences() : locale(NULL)
 
 bool SpekPreferences::get_check_update()
 {
-    bool result = true;
+    bool result = false;
     this->config->Read("/update/check", &result);
     return result;
 }
