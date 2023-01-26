@@ -222,6 +222,9 @@ AudioFileImpl::~AudioFileImpl()
     if (this->packet) {
         av_packet_free(&this->packet);
     }
+    if (this->codec_context) {
+        avcodec_free_context(&codec_context);
+    }
     if (this->format_context) {
         avformat_close_input(&this->format_context);
     }
