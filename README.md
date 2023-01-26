@@ -15,20 +15,25 @@ Find out more about Spek on its website: <http://spek.cc/>
 
 <img src="./data/spek-screenshot.png" height="500">
 
-## Spek-X 0.9.1 - 2023/1/26
+## Spek-X 0.9.2 - 2023/1/27
 
 ### Sources / Packages
 
 Category                             | Download link
 -------------------------------------|----------------
-Source tarball                       | [v0.9.1.tar.gz](https://github.com/MikeWang000000/spek-X/archive/v0.9.1.tar.gz)
-Windows (x64)                        | [spek-x-0.9.1-windows-x86_64.zip](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.1/spek-x-0.9.1-windows-x86_64.zip)
-Windows (Arm64)                      | [spek-x-0.9.1-windows-aarch64.zip](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.1/spek-x-0.9.1-windows-aarch64.zip)
-macOS (Intel)                        | [spek-x-0.9.1-macos-x86_64.tgz](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.1/spek-x-0.9.1-macos-x86_64.tgz)
-macOS (Apple Silicon)                | [spek-x-0.9.1-macos-aarch64.tgz](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.1/spek-x-0.9.1-macos-aarch64.tgz)
+Source tarball                       | [v0.9.2.tar.gz](https://github.com/MikeWang000000/spek-X/archive/v0.9.2.tar.gz)
+Windows (x64)                        | [spek-x-0.9.2-windows-x86_64.zip](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.2/spek-x-0.9.2-windows-x86_64.zip)
+Windows (Arm64)                      | [spek-x-0.9.2-windows-aarch64.zip](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.2/spek-x-0.9.2-windows-aarch64.zip)
+macOS (Intel)                        | [spek-x-0.9.2-macos-x86_64.tgz](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.2/spek-x-0.9.2-macos-x86_64.tgz)
+macOS (Apple Silicon)                | [spek-x-0.9.2-macos-aarch64.tgz](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.2/spek-x-0.9.2-macos-aarch64.tgz)
 Debian packages (deb-multimedia.org) | [spek-x-dmo/](https://deb-multimedia.org/pool/main/s/spek-x-dmo/)
 
 ### New Features And Enhancements
+
+Spek-X 0.9.2 Updates:
+ * Support switching between audio channels.
+ * Remove 'check for updates' feature.
+ * Fix possible memory leaks.
 
 Spek-X 0.9.1 Updates:
  * Fix m4a and ogg decoding problems.
