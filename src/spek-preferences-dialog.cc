@@ -97,6 +97,7 @@ SpekPreferencesDialog::SpekPreferencesDialog(wxWindow *parent) :
     wxCheckBox *check_update = new wxCheckBox(this, ID_CHECK_UPDATE, _("Check for &updates"));
     /* Spek-X do not support check_update */
     check_update->SetValue(false);
+    check_update->Show(false);
     // inner_sizer->Add(check_update, 0, wxLEFT | wxTOP, 12);
     // check_update->SetValue(SpekPreferences::get().get_check_update());
 
