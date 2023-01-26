@@ -179,8 +179,10 @@ static const char *audio_extensions[] = {
     "au",
     "dts",
     "flac",
+    "flv",
     "gsm",
     "m4a",
+    "m4p",
     "m4r",
     "mka",
     "mp3",
@@ -300,11 +302,17 @@ void SpekWindow::on_about(wxCommandEvent&)
     info.AddDeveloper("Andreas Cadhalpun");
     info.AddDeveloper("Colin Watson");
     info.AddDeveloper("Daniel Hams");
+    info.AddDeveloper("Elias Ojala");
     info.AddDeveloper("Fabian Deutsch");
+    info.AddDeveloper("Guillaume Fourrier");
+    info.AddDeveloper("Jakov Smolic");
     info.AddDeveloper("Jonathan Gonzalez V");
+    info.AddDeveloper("Matteo Bini");
+    info.AddDeveloper("Mike Wang");
     info.AddDeveloper("Simon Ruderich");
     info.AddDeveloper("Stefan Kost");
     info.AddDeveloper("Thibault North");
+    info.AddDeveloper("Wyatt J. Brown");
     info.AddArtist("Olga Vasylevska");
     // TRANSLATORS: Add your name here
     wxString translator = _("translator-credits");
