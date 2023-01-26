@@ -1,4 +1,4 @@
-# SPEK-X(1) User's Guide | Version 0.9.1
+# SPEK-X(1) User's Guide | Version 0.9.2
 
 ## NAME
 

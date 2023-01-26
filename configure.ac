@@ -1,4 +1,4 @@
-AC_INIT([Spek-X],[0.9.1])
+AC_INIT([Spek-X],[0.9.2])
 AC_CONFIG_SRCDIR([src/spek.cc])
 AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE([1.11.1 foreign no-dist-gzip dist-xz serial-tests])
