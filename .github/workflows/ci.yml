@@ -36,20 +36,21 @@ jobs:
     runs-on: windows-2022
     defaults:
       run:
-        shell: msys2 {0}
+        shell: cmd
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-      - name: Setup MSYS2
-        uses: msys2/setup-msys2@v2
+      - name: Get dependencies from cache
+        uses: actions/cache/restore@v3
         with:
-          msystem: mingw64
-      - name: Install dependencies
+          key: spek-x-msys2-mingw64
+          path: C:\msys2
+      - name: Check whether MSYS2 is working
         run: |
-          cd '${{ github.workspace }}' && ./dist/win/install_deps.sh
+          "C:\msys2\msys64\usr\bin\env.exe" MSYSTEM=MINGW64 /usr/bin/bash -lc "echo OK"
       - name: Compile and bundle application
         run: |
-          cd '${{ github.workspace }}' && ./dist/win/bundle.sh
+          "C:\msys2\msys64\usr\bin\env.exe" MSYSTEM=MINGW64 /usr/bin/bash -lc "cd '${{ github.workspace }}' && ./dist/win/bundle.sh"
       - name: Archive production artifacts
         uses: actions/upload-artifact@v3
         with:

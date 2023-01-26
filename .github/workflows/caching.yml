@@ -1,0 +1,30 @@
+name: Caching
+run-name: Caching
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * 3,6"
+jobs:
+  Windows-MSYS2-MINGW64-Caching:
+    name: Windows MSYS2/MINGW64 Caching
+    runs-on: windows-2022
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Setup MSYS2
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: mingw64
+          location: C:\msys2
+      - name: Install dependencies
+        run: |
+          cd '${{ github.workspace }}' && ./dist/win/install_deps.sh
+          du -sh 'C:\msys2'
+      - name: Cache MSYS2
+        uses: actions/cache@v3
+        with:
+          key: spek-x-msys2-mingw64
+          path: C:\msys2
