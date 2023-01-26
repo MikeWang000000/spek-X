@@ -353,6 +353,9 @@ void SpekWindow::on_close(wxCommandEvent& event)
 
 static void * check_version(void *p)
 {
+    /* Spek-X do not support check_update */
+    return NULL;
+
     // Does the user want to check for updates?
     SpekPreferences& prefs = SpekPreferences::get();
     if (!prefs.get_check_update()) {
