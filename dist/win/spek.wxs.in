@@ -9,7 +9,7 @@
     <Package InstallerVersion="301" Compressed="yes" Platform="x86" InstallScope="perMachine"/>
     <Media Id="1" Cabinet="spek.cab" EmbedCab="yes" CompressionLevel="high" />
     <Property Id="ARPPRODUCTICON" Value="ProgramIcon" />
-    <Property Id="ARPHELPLINK" Value="https://github.com/withmorten/spek/blob/release/$(var.ProductVersion)/README.md" />
+    <Property Id="ARPHELPLINK" Value="https://github.com/MikeWang000000/spek-X/blob/v$(var.ProductVersion)/README.md" />
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION" />
     <UIRef Id="SpekInstallDir" />
     <UIRef Id="WixUI_ErrorProgressText" />
@@ -93,4 +93,3 @@
     </Feature>
   </Product>
 </Wix>
-
