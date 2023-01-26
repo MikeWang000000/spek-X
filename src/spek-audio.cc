@@ -106,28 +106,7 @@ std::unique_ptr<AudioFile> Audio::open(const std::string& file_name, int stream)
     if (!error) {
         avstream = format_context->streams[audio_stream];
         codecpar = avstream->codecpar;
-
-        switch (codecpar->codec_id) {
-        case AV_CODEC_ID_MP1:
-            codec = avcodec_find_decoder_by_name("mp1float");
-            break;
-        case AV_CODEC_ID_MP2:
-            codec = avcodec_find_decoder_by_name("mp2float");
-            break;
-        case AV_CODEC_ID_MP3:
-            codec = avcodec_find_decoder_by_name("mp3float");
-            break;
-        case AV_CODEC_ID_MP3ADU:
-            codec = avcodec_find_decoder_by_name("mp3adufloat");
-            break;
-        case AV_CODEC_ID_MP3ON4:
-            codec = avcodec_find_decoder_by_name("mp3on4float");
-            break;
-        default:
-            codec = avcodec_find_decoder(codecpar->codec_id);
-            break;
-        }
-
+        codec = avcodec_find_decoder(codecpar->codec_id);
         if (!codec) {
             error = AudioError::NO_DECODER;
         }
