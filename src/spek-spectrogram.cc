@@ -105,6 +105,16 @@ void SpekSpectrogram::on_char(wxKeyEvent& evt)
     }
 #endif
     switch (key_code) {
+    case 'c':
+        if (this->channels) {
+            this->channel = (this->channel + 1) % this->channels;
+        }
+        break;
+    case 'C':
+        if (this->channels) {
+            this->channel = (this->channel - 1 + this->channels) % this->channels;
+        }
+        break;
     case 'f':
         this->window_function = (enum window_function) ((this->window_function + 1) % WINDOW_COUNT);
         break;
