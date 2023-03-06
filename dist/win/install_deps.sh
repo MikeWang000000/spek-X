@@ -5,7 +5,7 @@
 
 # Adjust these variables if necessary.
 WX_VER="3.2.1"
-FFMPEG_VER="5.1.2"
+FFMPEG_VER="6.0"
 PREFIX="$MINGW_PREFIX"
 
 # Check the envrionment variables
