@@ -21,14 +21,18 @@ Find out more about Spek on its website: <http://spek.cc/>
 
 Category                             | Download link
 -------------------------------------|----------------
-Source tarball                       | [v0.9.2.tar.gz](https://github.com/MikeWang000000/spek-X/archive/v0.9.2.tar.gz)
-Windows (x64)                        | [spek-x-0.9.2-windows-x86_64.zip](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.2/spek-x-0.9.2-windows-x86_64.zip)
-Windows (Arm64)                      | [spek-x-0.9.2-windows-aarch64.zip](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.2/spek-x-0.9.2-windows-aarch64.zip)
-macOS (Intel)                        | [spek-x-0.9.2-macos-x86_64.tgz](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.2/spek-x-0.9.2-macos-x86_64.tgz)
-macOS (Apple Silicon)                | [spek-x-0.9.2-macos-aarch64.tgz](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.2/spek-x-0.9.2-macos-aarch64.tgz)
+Source tarball                       | [v0.9.3.tar.gz](https://github.com/MikeWang000000/spek-X/archive/v0.9.3.tar.gz)
+Windows (x64)                        | [spek-x-0.9.3-windows-x86_64.zip](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.3/spek-x-0.9.3-windows-x86_64.zip)
+Windows (Arm64)                      | [spek-x-0.9.3-windows-aarch64.zip](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.3/spek-x-0.9.3-windows-aarch64.zip)
+macOS (Intel)                        | [spek-x-0.9.3-macos-x86_64.tgz](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.3/spek-x-0.9.3-macos-x86_64.tgz)
+macOS (Apple Silicon)                | [spek-x-0.9.3-macos-aarch64.tgz](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.3/spek-x-0.9.3-macos-aarch64.tgz)
 Debian packages (deb-multimedia.org) | [spek-x-dmo/](https://deb-multimedia.org/pool/main/s/spek-x-dmo/)
 
 ### New Features And Enhancements
+
+Spek-X 0.9.3 Updates:
+ * Upgrade to FFmpeg 6.0.
+ * Add support for 32-bit FLAC audio.
 
 Spek-X 0.9.2 Updates:
  * Support switching between audio channels.
