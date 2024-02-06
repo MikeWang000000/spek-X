@@ -4,8 +4,8 @@
 # Check README.md in this directory for instructions.
 
 # Adjust these variables if necessary.
-WX_VER="3.2.1"
-FFMPEG_VER="6.0"
+WX_VER="3.2.4"
+FFMPEG_VER="6.1.1"
 PREFIX="$MINGW_PREFIX"
 
 # Check the envrionment variables
