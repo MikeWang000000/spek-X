@@ -142,8 +142,11 @@ std::unique_ptr<AudioFile> Audio::open(const std::string& file_name, int stream)
         if (bits_per_sample) {
             bit_rate = 0;
         }
+#if (LIBAVFORMAT_VERSION_MAJOR) < 61
         channels = codecpar->channels;
-
+#else
+        channels = codecpar->ch_layout.nb_channels;
+#endif
         if (avstream->duration != AV_NOPTS_VALUE) {
             duration = avstream->duration * av_q2d(avstream->time_base);
         } else if (format_context->duration != AV_NOPTS_VALUE) {
