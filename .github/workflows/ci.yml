@@ -8,13 +8,12 @@ env:
 jobs:
   Build-Debian-x86_64:
     name: Build Spek-X (Debian, x86_64)
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
       - name: Install dependencies
         run: |
-          sudo sed -i 's/jammy/lunar/g' /etc/apt/sources.list
           sudo apt update
           sudo apt install -y intltool libwxgtk3.2-dev wx-common libavcodec-dev libavformat-dev
       - name: Compile and bundle application
@@ -101,13 +100,12 @@ jobs:
 
   Unit-Test:
     name: Unit Tests
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
       - name: Install dependencies
         run: |
-          sudo sed -i 's/jammy/lunar/g' /etc/apt/sources.list
           sudo apt update
           sudo apt install -y intltool libwxgtk3.2-dev wx-common libavcodec-dev libavformat-dev
       - name: Run tests
