@@ -26,7 +26,7 @@ brew install autoconf automake gettext intltool libtool pkg-config wxwidgets nas
 # Force install arm64 libraries on x86_64 machines
 for dep in jpeg-turbo libpng zstd libtiff pcre2 wxwidgets
 do
-    brew reinstall $(brew fetch --force --bottle-tag=arm64_monterey "${dep}" | egrep -om1 '/Users/.*\.gz') || return 1
+    brew reinstall $(brew fetch --force --bottle-tag=arm64_ventura "${dep}" | egrep -om1 '/Users/.*\.gz') || exit 1
 done
 
 rm -rf $(dirname $0)/../deps

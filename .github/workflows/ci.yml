@@ -8,39 +8,39 @@ env:
 jobs:
   Build-Debian-x86_64:
     name: Build Spek-X (Debian, x86_64)
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
+    container: debian:sid
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install dependencies
         run: |
-          sudo apt update
-          sudo apt install -y intltool libwxgtk3.2-dev wx-common libavcodec-dev libavformat-dev
+          apt update
+          apt install -y g++ make pkg-config libtool intltool libwxgtk3.2-dev wx-common libavcodec-dev libavformat-dev
       - name: Compile and bundle application
         run: |
-          cd '${{ github.workspace }}'
           mkdir -p ./dist/debian/spek-x/usr ./dist/debian/spek-x/DEBIAN
           ./autogen.sh --prefix="$(realpath ./dist/debian/spek-x/usr)"
           make -j2 && make install
           cp ./dist/debian/control.ci ./dist/debian/spek-x/DEBIAN/control
           dpkg-deb --build dist/debian/spek-x
       - name: Archive production artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Spek-X (Debian, x86_64)
           path: ${{ github.workspace }}/dist/debian/spek-x.deb
 
   Build-Windows-x64:
     name: Build Spek-X (Windows, x64)
-    runs-on: windows-2022
+    runs-on: windows-latest
     defaults:
       run:
         shell: cmd
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Get dependencies from cache
-        uses: actions/cache/restore@v3
+        uses: actions/cache/restore@v4
         with:
           key: spek-x-msys2-mingw64
           path: C:\msys2
@@ -51,17 +51,17 @@ jobs:
         run: |
           "C:\msys2\msys64\usr\bin\env.exe" MSYSTEM=MINGW64 /usr/bin/bash -lc "cd '${{ github.workspace }}' && ./dist/win/bundle.sh"
       - name: Archive production artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Spek-X (Windows, x64)
           path: ${{ github.workspace }}/dist/win/Spek/Spek.zip
 
   Build-macOS-Intel:
     name: Build Spek-X (macOS, Intel)
-    runs-on: macos-12
+    runs-on: macos-13
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install dependencies
         run: |
           eval "$(brew shellenv)"
@@ -72,17 +72,17 @@ jobs:
           eval "$(brew shellenv)"
           cd '${{ github.workspace }}' && ./dist/osx/bundle.sh
       - name: Archive production artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Spek-X (macOS, Intel)
           path: ${{ github.workspace }}/dist/osx/Spek.tgz
 
   Build-macOS-AppleSilicon:
     name: Build Spek-X (macOS, Apple Silicon)
-    runs-on: macos-12
+    runs-on: macos-13
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install dependencies
         run: |
           eval "$(brew shellenv)"
@@ -93,21 +93,22 @@ jobs:
           eval "$(brew shellenv)"
           cd '${{ github.workspace }}' && ./dist/osx/cross/bundle.sh i_am_ci
       - name: Archive production artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Spek-X (macOS, Apple Silicon)
           path: ${{ github.workspace }}/dist/osx/Spek.tgz
 
   Unit-Test:
     name: Unit Tests
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
+    container: debian:sid
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install dependencies
         run: |
-          sudo apt update
-          sudo apt install -y intltool libwxgtk3.2-dev wx-common libavcodec-dev libavformat-dev
+          apt update
+          apt install -y g++ make pkg-config libtool intltool libwxgtk3.2-dev wx-common libavcodec-dev libavformat-dev
       - name: Run tests
         run: |
           ./autogen.sh && make check
