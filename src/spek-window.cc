@@ -30,8 +30,10 @@ BEGIN_EVENT_TABLE(SpekWindow, wxFrame)
     EVT_COMMAND(-1, SPEK_NOTIFY_EVENT, SpekWindow::on_notify)
 END_EVENT_TABLE()
 
+#ifdef SPEK_CHECK_VERSION
 // Forward declarations.
 static void * check_version(void *);
+#endif
 
 class SpekDropTarget : public wxFileDropTarget
 {
@@ -147,8 +149,10 @@ SpekWindow::SpekWindow(int width, int height, const wxString& path, const wxStri
 
     SetSizer(sizer);
 
-    // pthread_t thread;
-    // pthread_create(&thread, NULL, &check_version, this);
+#ifdef SPEK_CHECK_VERSION
+    pthread_t thread;
+    pthread_create(&thread, NULL, &check_version, this);
+#endif
 }
 
 void SpekWindow::open(const wxString& path)
@@ -351,11 +355,9 @@ void SpekWindow::on_close(wxCommandEvent& event)
     self->Layout();
 }
 
+#ifdef SPEK_CHECK_VERSION
 static void * check_version(void *p)
 {
-    /* Spek-X do not support check_update */
-    return NULL;
-
     // Does the user want to check for updates?
     SpekPreferences& prefs = SpekPreferences::get();
     if (!prefs.get_check_update()) {
@@ -406,3 +408,4 @@ static void * check_version(void *p)
     prefs.set_last_update(days);
     return NULL;
 }
+#endif
