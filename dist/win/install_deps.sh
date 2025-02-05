@@ -52,16 +52,27 @@ make -j$(nproc) && make install
 cd ../..
 
 # === FFmpeg ===
-# There are some problems assembling aarch64 code. Just disable it.
-[ "$MSYSTEM" = "CLANGARM64" ] && FFMPEG_ASM_OPTION="--disable-asm" || FFMPEG_ASM_OPTION=""
 echo "# Installing FFmpeg..."
+if gcc -v >/dev/null 2>&1; then
+    CC=gcc
+elif clang -v >/dev/null 2>&1; then
+    CC=clang
+else
+    CC=cc
+fi
+if [ "$MSYSTEM" = "CLANGARM64" ]; then
+    ARCH=arm64
+else
+    ARCH=x86_64
+fi
 wget "$FFMPEG_URL"
 echo "$FFMPEG_SHA ffmpeg-${FFMPEG_VER}.tar.bz2" | sha256sum -c
 tar xf "ffmpeg-${FFMPEG_VER}.tar.bz2"
 cd "ffmpeg-${FFMPEG_VER}"
 ./configure \
     --prefix="$PREFIX" \
-    $FFMPEG_ASM_OPTION \
+    --cc="$CC" \
+    --arch="$ARCH" \
     --enable-version3 \
     --enable-gpl \
     --disable-programs \
