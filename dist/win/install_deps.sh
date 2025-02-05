@@ -31,6 +31,9 @@ cd "wxWidgets-${WX_VER}"
 # fix: pt_BR zh_CN zh_TW translation not works
 patch -p1 < ../../wx-translation.patch
 
+# fix: clang-19 compilation error
+patch -p1 < ../../wx-wxchar.patch
+
 mkdir msw-build
 cd msw-build
 ../configure \
