@@ -70,7 +70,7 @@ while [ ! -z "$BINS" ]; do
 done
 
 # Sign the app
-codesign -fs - ./Spek.app ./Spek.app/Contents/Frameworks/*
+codesign -fs - ./Spek.app --deep
 
 # Create a gzip tar archive
 rm -f Spek.tgz

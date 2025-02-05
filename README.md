@@ -15,20 +15,25 @@ Find out more about Spek on its website: <http://spek.cc/>
 
 <img src="./data/spek-screenshot.png" height="500">
 
-## Spek-X 0.9.2 - 2023/1/27
+## Spek-X 0.9.4 - 2025/2/6
 
 ### Sources / Packages
 
 Category                             | Download link
 -------------------------------------|----------------
-Source tarball                       | [v0.9.3.tar.gz](https://github.com/MikeWang000000/spek-X/archive/v0.9.3.tar.gz)
-Windows (x64)                        | [spek-x-0.9.3-windows-x86_64.zip](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.3/spek-x-0.9.3-windows-x86_64.zip)
-Windows (Arm64)                      | [spek-x-0.9.3-windows-aarch64.zip](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.3/spek-x-0.9.3-windows-aarch64.zip)
-macOS (Intel)                        | [spek-x-0.9.3-macos-x86_64.tgz](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.3/spek-x-0.9.3-macos-x86_64.tgz)
-macOS (Apple Silicon)                | [spek-x-0.9.3-macos-aarch64.tgz](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.3/spek-x-0.9.3-macos-aarch64.tgz)
+Source tarball                       | [v0.9.4.tar.gz](https://github.com/MikeWang000000/spek-X/archive/v0.9.4.tar.gz)
+Windows (x64)                        | [spek-x-0.9.4-windows-x86_64.zip](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.4/spek-x-0.9.4-windows-x86_64.zip)
+Windows (Arm64)                      | [spek-x-0.9.4-windows-aarch64.zip](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.4/spek-x-0.9.4-windows-aarch64.zip)
+macOS (Universal)                    | [spek-x-0.9.4-macos-universal.tgz](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.4/spek-x-0.9.4-macos-universal.tgz)
 Debian packages (deb-multimedia.org) | [spek-x-dmo/](https://deb-multimedia.org/pool/main/s/spek-x-dmo/)
 
 ### New Features And Enhancements
+
+Spek-X 0.9.4 Updates:
+ * Upgrade to FFmpeg 7.1.
+ * Replace deprecated FFmpeg APIs.
+ * macOS version is now distributed as a Universal Binary.
+ * Windows Arm64 version is now compiled with FFmpeg assembly optimizations.
 
 Spek-X 0.9.3 Updates:
  * Upgrade to FFmpeg 6.0.

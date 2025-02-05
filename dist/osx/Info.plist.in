@@ -7,11 +7,11 @@
     <key>CFBundleExecutable</key>
     <string>Spek</string>
     <key>CFBundleGetInfoString</key>
-    <string>Spek @VERSION@</string>
+    <string>Spek-X @VERSION@</string>
     <key>CFBundleIconFile</key>
     <string>Spek.icns</string>
     <key>CFBundleIdentifier</key>
-    <string>org.spek-project</string>
+    <string>org.spek-x-project</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundlePackageType</key>
@@ -25,9 +25,9 @@
     <key>NSPrincipalClass</key>
     <string>NSApplication</string>
     <key>NSHumanReadableCopyright</key>
-    <string>Copyright (c) 2010-2013 Alexander Kojevnikov and contributors</string>
+    <string>Copyright (c) 2010-2025 Alexander Kojevnikov and contributors</string>
     <key>LSMinimumSystemVersion</key>
-    <string>10.5</string>
+    <string>10.10</string>
     <key>CFBundleDocumentTypes</key>
     <array>
         <dict>

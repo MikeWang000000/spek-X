@@ -94,10 +94,10 @@ void SpekSpectrogram::save(const wxString& path)
 
 void SpekSpectrogram::on_char(wxKeyEvent& evt)
 {
-    int key_modifier = evt.GetModifiers();
     int key_code = evt.GetKeyCode();
 
 #ifdef OS_OSX
+    int key_modifier = evt.GetModifiers();
     // Using Command-W to close the window in macOS
     if (key_modifier == wxMOD_CONTROL && key_code == 'W') {
         this->GetParent()->Close(true);
@@ -194,11 +194,16 @@ void SpekSpectrogram::on_size(wxSizeEvent&)
     }
 }
 
-void SpekSpectrogram::on_have_sample(SpekHaveSampleEvent& event)
+void SpekSpectrogram::on_have_sample(wxEvent& event)
 {
-    int bands = event.get_bands();
-    int sample = event.get_sample();
-    const float *values = event.get_values();
+    SpekHaveSampleEvent *ev = dynamic_cast<SpekHaveSampleEvent *>(&event);
+    if (ev == nullptr) {
+        return;
+    }
+
+    int bands = ev->get_bands();
+    int sample = ev->get_sample();
+    const float *values = ev->get_values();
 
     if (sample == -1) {
         this->stop();

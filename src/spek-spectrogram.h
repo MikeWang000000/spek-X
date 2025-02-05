@@ -24,7 +24,7 @@ private:
     void on_char(wxKeyEvent& evt);
     void on_paint(wxPaintEvent& evt);
     void on_size(wxSizeEvent& evt);
-    void on_have_sample(SpekHaveSampleEvent& evt);
+    void on_have_sample(wxEvent& evt);
     void render(wxDC& dc);
 
     void start();

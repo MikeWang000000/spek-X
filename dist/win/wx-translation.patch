@@ -1,0 +1,51 @@
+diff --git a/src/common/translation.cpp b/src/common/translation.cpp
+index 30b1ca42dc..a64778061a 100644
+--- a/src/common/translation.cpp
++++ b/src/common/translation.cpp
+@@ -1398,11 +1398,12 @@ bool wxTranslations::AddStdCatalog()
+     // the name without the version if it's not found, as message catalogs
+     // typically won't have the version in their names under non-Unix platforms
+     // (i.e. where they're not installed by our own "make install").
+-    wxString domain("wxstd-" wxSTRINGIZE(wxMAJOR_VERSION) "." wxSTRINGIZE(wxMINOR_VERSION));
+-    if ( GetBestAvailableTranslation(domain).empty() )
+-        domain = wxS("wxstd");
++    if ( AddAvailableCatalog("wxstd-" wxSTRINGIZE(wxMAJOR_VERSION) "." wxSTRINGIZE(wxMINOR_VERSION)) )
++        return true;
++    if ( AddCatalog(wxS("wxstd")) )
++        return true;
+ 
+-    return AddCatalog(domain);
++    return false;
+ }
+ 
+ #if !wxUSE_UNICODE
+@@ -1577,28 +1578,7 @@ wxString wxTranslations::DoGetBestAvailableTranslation(const wxString& domain, c
+ 
+     if ( !m_lang.empty() )
+     {
+-        wxLogTrace(TRACE_I18N,
+-                   "searching for best translation to %s for domain '%s'",
+-                   m_lang, domain);
+-
+-        wxString lang;
+-        if ( available.Index(m_lang) != wxNOT_FOUND )
+-        {
+-            lang = m_lang;
+-        }
+-        else
+-        {
+-            const wxString baselang = m_lang.BeforeFirst('_');
+-            if ( baselang != m_lang && available.Index(baselang) != wxNOT_FOUND )
+-                lang = baselang;
+-        }
+-
+-        if ( lang.empty() )
+-            wxLogTrace(TRACE_I18N, " => no available translations found");
+-        else
+-            wxLogTrace(TRACE_I18N, " => found '%s'", lang);
+-
+-        return lang;
++        return m_lang;
+     }
+ 
+     wxLogTrace(TRACE_I18N, "choosing best language for domain '%s'", domain);
