@@ -6,10 +6,10 @@ Build-Depends: debhelper (>= 9),
                autotools-dev,
                pkg-config,
                intltool (>= 0.35),
-               libavcodec-dev (>= 10:5.0~),
-               libavformat-dev (>= 10:5.0~),
-               libavutil-dev (>= 10:5.0~),
-               libwxgtk3.0-dev,
+               libavcodec-dev (>= 7:5.0.1),
+               libavformat-dev (>= 7:5.0.1),
+               libavutil-dev (>= 7:5.0.1),
+               libwxgtk3.2-dev,
                wx-common
 Standards-Version: 3.9.6
 Homepage: https://github.com/MikeWang000000/spek-X

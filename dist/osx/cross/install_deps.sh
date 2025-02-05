@@ -13,7 +13,7 @@ EOF
     exit 1
 fi
 
-FFMPEG_VER="7.0"
+FFMPEG_VER="7.1"
 PREFIX="/usr/local"
 
 # Check Homebrew
