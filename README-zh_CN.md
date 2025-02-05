@@ -12,20 +12,25 @@ Spek 可用于 *BSD、GNU/Linux、Windows 和 macOS.
 
 <img src="./data/spek-screenshot.png" height="500">
 
-## Spek-X 0.9.2 - 2023/1/27
+## Spek-X 0.9.4 - 2025/2/6
 
 ### Sources / Packages
 
 Category                             | Download link
 -------------------------------------|----------------
-源代码包                             | [v0.9.3.tar.gz](https://github.com/MikeWang000000/spek-X/archive/v0.9.3.tar.gz)
-Windows (x64)                        | [spek-x-0.9.3-windows-x86_64.zip](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.3/spek-x-0.9.3-windows-x86_64.zip)
-Windows (Arm64)                      | [spek-x-0.9.3-windows-aarch64.zip](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.3/spek-x-0.9.3-windows-aarch64.zip)
-macOS (Intel)                        | [spek-x-0.9.3-macos-x86_64.tgz](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.3/spek-x-0.9.3-macos-x86_64.tgz)
-macOS (Apple Silicon)                | [spek-x-0.9.3-macos-aarch64.tgz](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.3/spek-x-0.9.3-macos-aarch64.tgz)
+源代码包                             | [v0.9.4.tar.gz](https://github.com/MikeWang000000/spek-X/archive/v0.9.4.tar.gz)
+Windows (x64)                        | [spek-x-0.9.4-windows-x86_64.zip](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.4/spek-x-0.9.4-windows-x86_64.zip)
+Windows (Arm64)                      | [spek-x-0.9.4-windows-aarch64.zip](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.4/spek-x-0.9.4-windows-aarch64.zip)
+macOS (Universal)                    | [spek-x-0.9.4-macos-universal.tgz](https://github.com/MikeWang000000/spek-X/releases/download/v0.9.4/spek-x-0.9.4-macos-universal.tgz)
 Debian 软件包 (deb-multimedia.org)   | [spek-x-dmo/](https://deb-multimedia.org/pool/main/s/spek-x-dmo/)
 
 ### 新增功能和改进
+
+Spek-X 0.9.4 更新：
+ * FFmpeg 更新至 7.1。
+ * 替换了 FFmpeg 不推荐的 API。
+ * macOS 程序现在通过 Universal Binary 的形式发布。
+ * Windows Arm64 程序现在编译启用了 FFmpeg 的汇编代码优化。
 
 Spek-X 0.9.3 更新：
  * FFmpeg 更新至 6.0。

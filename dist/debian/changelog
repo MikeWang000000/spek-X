@@ -1,3 +1,10 @@
+spek-x (0.9.4-1) unstable; urgency=low
+
+  * Replace deprecated FFmpeg APIs
+  * Fix GCC 14 compilation warnings
+
+ -- MikeWang000000 <mikewang000000@gmail.com>  Thu, 06 Feb 2025 04:07:29 +0800
+
 spek-x (0.9.2-1) unstable; urgency=low
 
   * Support switching between audio channels.
