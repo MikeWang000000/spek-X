@@ -15,7 +15,7 @@ FFMPEG_SHA="fd59e6160476095082e94150ada5a6032d7dcc282fe38ce682a00c18e7820528"
 
 PREFIX="$MINGW_PREFIX"
 
-pacman -Sy && pacman -S --needed --noconfirm autotools intltool yasm zip "${MINGW_PACKAGE_PREFIX}-toolchain"
+pacman -Sy && pacman -S --needed --noconfirm autotools patch intltool yasm zip "${MINGW_PACKAGE_PREFIX}-toolchain"
 
 rm -rf $(dirname $0)/deps
 mkdir -p $(dirname $0)/deps
@@ -27,6 +27,10 @@ wget "$WX_URL"
 echo "$WX_SHA wxWidgets-$WX_VER.tar.bz2" | sha256sum -c
 tar xf "wxWidgets-${WX_VER}.tar.bz2"
 cd "wxWidgets-${WX_VER}"
+
+# fix: pt_BR zh_CN zh_TW translation not works
+patch -p1 < ../../wx-translation.patch
+
 mkdir msw-build
 cd msw-build
 ../configure \
