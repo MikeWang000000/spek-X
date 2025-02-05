@@ -59,7 +59,7 @@ jobs:
 
   Build-macOS-Intel:
     name: Build Spek-X (macOS, Intel)
-    runs-on: macos-13
+    runs-on: macos-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
@@ -67,20 +67,20 @@ jobs:
         run: |
           eval "$(brew shellenv)"
           brew unlink perl
-          cd '${{ github.workspace }}' && ./dist/osx/install_deps.sh
+          cd '${{ github.workspace }}' && ARCH=x86_64 ./dist/osx/install_deps.sh
       - name: Compile and bundle application
         run: |
           eval "$(brew shellenv)"
-          cd '${{ github.workspace }}' && ./dist/osx/bundle.sh
+          cd '${{ github.workspace }}' && ARCH=x86_64 ./dist/osx/bundle.sh
       - name: Archive production artifacts
         uses: actions/upload-artifact@v4
         with:
           name: Spek-X (macOS, Intel)
-          path: ${{ github.workspace }}/dist/osx/Spek.tgz
+          path: ${{ github.workspace }}/dist/osx/Spek.x86_64.tgz
 
   Build-macOS-AppleSilicon:
     name: Build Spek-X (macOS, Apple Silicon)
-    runs-on: macos-13
+    runs-on: macos-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
@@ -88,15 +88,44 @@ jobs:
         run: |
           eval "$(brew shellenv)"
           brew unlink perl
-          cd '${{ github.workspace }}' && ./dist/osx/cross/install_deps.sh i_am_ci
+          cd '${{ github.workspace }}' && ARCH=arm64 ./dist/osx/install_deps.sh
       - name: Compile and bundle application
         run: |
           eval "$(brew shellenv)"
-          cd '${{ github.workspace }}' && ./dist/osx/cross/bundle.sh i_am_ci
+          cd '${{ github.workspace }}' && ARCH=arm64 ./dist/osx/bundle.sh
       - name: Archive production artifacts
         uses: actions/upload-artifact@v4
         with:
           name: Spek-X (macOS, Apple Silicon)
+          path: ${{ github.workspace }}/dist/osx/Spek.arm64.tgz
+
+  Build-macOS-Universal:
+    name: Build Spek-X (macOS, Universal)
+    runs-on: macos-latest
+    needs:
+      - Build-macOS-Intel
+      - Build-macOS-AppleSilicon
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Download Spek-X (macOS, Intel)
+        uses: actions/download-artifact@v4
+        with:
+          name: Spek-X (macOS, Intel)
+          path: ${{ github.workspace }}/dist/osx/
+      - name: Download Spek-X (macOS, Apple Silicon)
+        uses: actions/download-artifact@v4
+        with:
+          name: Spek-X (macOS, Apple Silicon)
+          path: ${{ github.workspace }}/dist/osx/
+      - name: Bundle application
+        run: |
+          eval "$(brew shellenv)"
+          cd '${{ github.workspace }}' && ./dist/osx/bundle_universal.sh merge_only
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Spek-X (macOS, Universal)
           path: ${{ github.workspace }}/dist/osx/Spek.tgz
 
   Unit-Test:
