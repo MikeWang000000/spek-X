@@ -3,6 +3,7 @@
 #include <memory>
 #include <ostream>
 #include <string>
+#include <stdint.h>
 
 class AudioFile;
 enum class AudioError;

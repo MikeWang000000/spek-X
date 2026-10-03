@@ -49,15 +49,19 @@ build_wxwidgets()
 
     if [ ! -d "wxWidgets-$WX_VER" ]; then
         wget "$WX_URL"
-        echo "$WX_SHA wxWidgets-$WX_VER.tar.bz2" | sha256sum -c
+        echo "$WX_SHA wxWidgets-$WX_VER.tar.bz2" | sha256sum -c -
         tar xf "wxWidgets-$WX_VER.tar.bz2"
     fi
     cd "wxWidgets-$WX_VER"
+
+    # Modern macOS SDKs no longer ship the legacy <fp.h> header.
+    sed -i '' 's|include <fp.h>|include <math.h>|' src/png/pngpriv.h
 
     mkdir "builddir.$ARCH"
     cd "builddir.$ARCH"
     cmake .. \
         -DCMAKE_INSTALL_PREFIX="$DEPSDIR" \
+        -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
         -DCMAKE_OSX_ARCHITECTURES="$ARCH" \
         -DCMAKE_OSX_DEPLOYMENT_TARGET="$MACOSX_DEPLOYMENT_TARGET" \
         -DCMAKE_BUILD_TYPE=Release \
@@ -96,7 +100,10 @@ build_ffmpeg()
 
     if [ ! -d "ffmpeg-${FFMPEG_VER}" ]; then
         wget "$FFMPEG_URL"
-        echo "$FFMPEG_SHA ffmpeg-${FFMPEG_VER}.tar.bz2" | sha256sum -c
+        # Pass "-" explicitly so that the checksum is read from stdin.
+        # The BSD/Darwin sha256sum bundled with macOS requires a file
+        # argument, unlike GNU coreutils which defaults to stdin.
+        echo "$FFMPEG_SHA ffmpeg-${FFMPEG_VER}.tar.bz2" | sha256sum -c -
         tar xf "ffmpeg-${FFMPEG_VER}.tar.bz2"
     fi
     cd "ffmpeg-${FFMPEG_VER}"

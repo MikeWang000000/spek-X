@@ -24,7 +24,7 @@ cd $(dirname $0)/deps
 # === wxWidgets ===
 echo "# Installing wxWidgets..."
 wget "$WX_URL"
-echo "$WX_SHA wxWidgets-$WX_VER.tar.bz2" | sha256sum -c
+echo "$WX_SHA wxWidgets-$WX_VER.tar.bz2" | sha256sum -c -
 tar xf "wxWidgets-${WX_VER}.tar.bz2"
 cd "wxWidgets-${WX_VER}"
 
@@ -66,7 +66,7 @@ else
     ARCH=x86_64
 fi
 wget "$FFMPEG_URL"
-echo "$FFMPEG_SHA ffmpeg-${FFMPEG_VER}.tar.bz2" | sha256sum -c
+echo "$FFMPEG_SHA ffmpeg-${FFMPEG_VER}.tar.bz2" | sha256sum -c -
 tar xf "ffmpeg-${FFMPEG_VER}.tar.bz2"
 cd "ffmpeg-${FFMPEG_VER}"
 ./configure \

@@ -12,7 +12,7 @@ jobs:
     container: debian:sid
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Install dependencies
         run: |
           apt update
@@ -26,7 +26,7 @@ jobs:
           cp ./dist/debian/control.ci ./dist/debian/spek-x/DEBIAN/control
           dpkg-deb --build dist/debian/spek-x
       - name: Archive production artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: Spek-X (Debian, x86_64)
           path: ${{ github.workspace }}/dist/debian/spek-x.deb
@@ -39,12 +39,14 @@ jobs:
         shell: cmd
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Get dependencies from cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v6
         with:
-          key: spek-x-msys2-mingw64
+          key: spek-x-msys2-mingw64-latest
           path: C:\msys2
+          restore-keys: |
+            spek-x-msys2-mingw64
       - name: Check whether MSYS2 is working
         run: |
           "C:\msys2\msys64\usr\bin\env.exe" MSYSTEM=MINGW64 /usr/bin/bash -lc "echo OK"
@@ -52,7 +54,7 @@ jobs:
         run: |
           "C:\msys2\msys64\usr\bin\env.exe" MSYSTEM=MINGW64 /usr/bin/bash -lc "cd '${{ github.workspace }}' && ./dist/win/bundle.sh"
       - name: Archive production artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: Spek-X (Windows, x64)
           path: ${{ github.workspace }}/dist/win/Spek/Spek.zip
@@ -62,7 +64,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Install dependencies
         run: |
           eval "$(brew shellenv)"
@@ -73,7 +75,7 @@ jobs:
           eval "$(brew shellenv)"
           cd '${{ github.workspace }}' && ARCH=x86_64 ./dist/osx/bundle.sh
       - name: Archive production artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: Spek-X (macOS, Intel)
           path: ${{ github.workspace }}/dist/osx/Spek.x86_64.tgz
@@ -83,7 +85,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Install dependencies
         run: |
           eval "$(brew shellenv)"
@@ -94,7 +96,7 @@ jobs:
           eval "$(brew shellenv)"
           cd '${{ github.workspace }}' && ARCH=arm64 ./dist/osx/bundle.sh
       - name: Archive production artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: Spek-X (macOS, Apple Silicon)
           path: ${{ github.workspace }}/dist/osx/Spek.arm64.tgz
@@ -107,14 +109,14 @@ jobs:
       - Build-macOS-AppleSilicon
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Download Spek-X (macOS, Intel)
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: Spek-X (macOS, Intel)
           path: ${{ github.workspace }}/dist/osx/
       - name: Download Spek-X (macOS, Apple Silicon)
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: Spek-X (macOS, Apple Silicon)
           path: ${{ github.workspace }}/dist/osx/
@@ -123,7 +125,7 @@ jobs:
           eval "$(brew shellenv)"
           cd '${{ github.workspace }}' && ./dist/osx/bundle_universal.sh merge_only
       - name: Archive production artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: Spek-X (macOS, Universal)
           path: ${{ github.workspace }}/dist/osx/Spek.tgz
@@ -134,7 +136,7 @@ jobs:
     container: debian:sid
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Install dependencies
         run: |
           apt update

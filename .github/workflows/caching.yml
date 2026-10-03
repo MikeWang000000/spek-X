@@ -13,7 +13,7 @@ jobs:
         shell: msys2 {0}
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Setup MSYS2
         uses: msys2/setup-msys2@v2
         with:
@@ -23,8 +23,8 @@ jobs:
         run: |
           cd '${{ github.workspace }}' && ./dist/win/install_deps.sh
           du -sh 'C:\msys2'
-      - name: Cache MSYS2
-        uses: actions/cache@v4
+      - name: Save MSYS2 cache
+        uses: actions/cache/save@v6
         with:
-          key: spek-x-msys2-mingw64
+          key: spek-x-msys2-mingw64-${{ github.run_id }}-${{ github.run_attempt }}
           path: C:\msys2
