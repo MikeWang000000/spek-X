@@ -1,5 +1,8 @@
 #include <map>
 
+#include <libavcodec/version.h>
+#include <libavformat/version.h>
+
 #include "spek-audio.h"
 
 #include "test.h"
@@ -59,7 +62,19 @@ static void test_read(AudioFile *file, int samples)
 
 void test_audio()
 {
+#if LIBAVFORMAT_VERSION_MAJOR >= 62
+    // FFmpeg 8.0+ (since 5a526fd) subtracts the encoder start/end padding from
+    // the Xing duration.
+    const double MP3_T = 0.1;
+#else
     const double MP3_T = 5.0 * 1152 / 44100; // 5 frames * duration per mp3 frame
+#endif
+#if LIBAVCODEC_VERSION_MAJOR >= 63
+    // FFmpeg 9.0+ (since 2153c67) discards the AAC encoder priming samples.
+    const int AAC_SAMPLES = 4410;
+#else
+    const int AAC_SAMPLES = 5120;
+#endif
     const double AAC_T = (10240 + 628) / 2.0 / 44100;
     const double DCA_T = 8.0 * 21180 / 1411216; // file size / bit rate
     const double AC3_T = 8.0 * 2490 / 190764; // file size / bit rate
@@ -92,7 +107,7 @@ void test_audio()
         {"2ch-44100Hz-V2.mp3",
             {AudioError::OK, "MP3", 150124, 44100, 0, 2, MP3_T, 44100 / 10}},
         {"2ch-44100Hz-q100.m4a",
-            {AudioError::OK, "AAC", 159649, 44100, 0, 2, AAC_T, 5120}},
+            {AudioError::OK, "AAC", 159649, 44100, 0, 2, AAC_T, AAC_SAMPLES}},
         {"2ch-44100Hz-q5.ogg",
             {AudioError::OK, "Vorbis", 160000, 44100, 0, 2, 0.1, 4282}},
         {"2ch-44100Hz.dts",
