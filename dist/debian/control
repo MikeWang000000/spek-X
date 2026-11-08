@@ -5,7 +5,7 @@ Maintainer: MikeWang000000 <mikewang000000@gmail.com>
 Build-Depends: debhelper (>= 9),
                autotools-dev,
                pkg-config,
-               intltool (>= 0.35),
+               gettext (>= 0.19.8),
                libavcodec-dev (>= 7:5.0.1),
                libavformat-dev (>= 7:5.0.1),
                libavutil-dev (>= 7:5.0.1),

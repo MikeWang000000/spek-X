@@ -10,9 +10,6 @@ EXTRA_DIST = \
 	LICENCE.md \
 	MANUAL.md \
 	README.md \
-	intltool-extract.in \
-	intltool-merge.in \
-	intltool-update.in \
 	lic/Expat \
 	lic/GPL \
 	lic/IJG \
@@ -23,8 +20,3 @@ EXTRA_DIST = \
 	lic/wxWindows \
 	lic/zlib \
 	tests/samples
-
-DISTCLEANFILES = \
-	intltool-extract \
-	intltool-merge \
-	intltool-update

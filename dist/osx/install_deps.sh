@@ -37,7 +37,7 @@ install_homebrew_deps()
         echo "Follow the instructions at [https://brew.sh] to install Homebrew."
         exit 1
     }
-    brew install -q autoconf automake gettext intltool libtool pkg-config nasm wget coreutils
+    brew install -q autoconf automake gettext gettext libtool pkg-config nasm wget coreutils
 }
 
 build_wxwidgets()

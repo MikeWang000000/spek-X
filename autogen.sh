@@ -17,6 +17,6 @@ test -n "$srcdir" || srcdir=.
   } &&
   # autoconf >= 2.73 reruns aclocal with "-I m4"; ensure it exists.
   mkdir -p m4 &&
-  AUTOPOINT='intltoolize --automake --copy' autoreconf -fiv
+  autoreconf -fiv
 ) || exit
 test -n "$NOCONFIGURE" || "$srcdir/configure" "$@"

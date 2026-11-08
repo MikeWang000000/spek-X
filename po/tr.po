@@ -49,15 +49,15 @@ msgstr "%d Hz"
 #, c-format
 msgid "%d bit"
 msgid_plural "%d bits"
-msgstr[0] "%d bit\n\n%d bit"
-msgstr[1] "%d bit\n\n%d bit"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../src/spek-pipeline.cc:217
 #, c-format
 msgid "%d channel"
 msgid_plural "%d channels"
-msgstr[0] "%d kanal\n\n%d kanal"
-msgstr[1] "%d kanal\n\n%d kanal"
+msgstr[0] "%d kanal"
+msgstr[1] "%d kanal"
 
 #: ../src/spek-pipeline.cc:234
 msgid "Cannot open input file"

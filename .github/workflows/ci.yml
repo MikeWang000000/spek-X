@@ -17,7 +17,7 @@ jobs:
         run: |
           apt update
           apt full-upgrade -y
-          apt install -y g++ make pkg-config libtool intltool libwxgtk3.2-dev wx-common libavcodec-dev libavformat-dev
+          apt install -y g++ make pkg-config libtool gettext libwxgtk3.2-dev wx-common libavcodec-dev libavformat-dev
       - name: Compile and bundle application
         run: |
           mkdir -p ./dist/debian/spek-x/usr ./dist/debian/spek-x/DEBIAN
@@ -141,7 +141,7 @@ jobs:
         run: |
           apt update
           apt full-upgrade -y
-          apt install -y g++ make pkg-config libtool intltool libwxgtk3.2-dev wx-common libavcodec-dev libavformat-dev
+          apt install -y g++ make pkg-config libtool gettext libwxgtk3.2-dev wx-common libavcodec-dev libavformat-dev
       - name: Run tests
         run: |
           ./autogen.sh && make check
