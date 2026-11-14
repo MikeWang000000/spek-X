@@ -74,6 +74,10 @@
             <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Spek.Audio\DefaultIcon" Value="[#spek.ico]" Type="string" />
             <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Spek.Audio\shell" Value="open" Type="string" />
             <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\Spek.Audio\shell\open\command" Value="&quot;[INSTALLLOCATION]spek.exe&quot; &quot;%1&quot;" Type="string" />
+            <!-- Right-click menu entry for every file: spek.exe "%1" -->
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\*\shell\SpekX" Value="Analyze with Spek-X" Type="string" />
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\*\shell\SpekX" Name="Icon" Value="&quot;[INSTALLLOCATION]spek.exe&quot;,0" Type="string" />
+            <RegistryValue Root="HKLM" Key="SOFTWARE\Classes\*\shell\SpekX\command" Value="&quot;[INSTALLLOCATION]spek.exe&quot; &quot;%1&quot;" Type="string" />
             <!-- Associate with file extensions -->
             <?foreach ext in "3gp;aac,aif;aifc;aiff;amr;awb;ape;au;dts;flac;gsm;m4a;m4p;mp3;mp4;mp+;mpc;mpp;oga;ogg;opus;ra;ram;snd;wav;wma;wv"?>
             <RegistryValue Root="HKLM" Key="SOFTWARE\Spek\Capabilities\FileAssociations" Name=".$(var.ext)" Value="Spek.Audio" Type="string" />
