@@ -47,6 +47,7 @@ mkdir -p src/dist/win && cp dist/win/spek.res src/dist/win/
 cd dist/win
 rm -fr Spek && mkdir Spek
 cp build/bin/spek.exe Spek/
+cp context-menu.ps1 install-context-menu.bat uninstall-context-menu.bat Spek/
 cp ../../LICENCE.md Spek/
 cp ../../README.md Spek/
 mkdir Spek/licenses
